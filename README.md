@@ -1,6 +1,6 @@
 # AILokak
 
-**Local-first AI interview coach — private, offline, instant.**
+**Local-first AI interview coach : private, offline, freedom.**
 **Built for the Tether Frontier Hackathon Track hackathon**.
 
 ---

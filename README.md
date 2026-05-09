@@ -9,8 +9,9 @@
 
 AILokak is a local AI coach interview platform powered by Tether qvac that eliminates data harvesting and recurring subscriptions. By executing entirely on local hardware, it ensures total data sovereignty and permanent free access. The platform integrates a marketplace where professionals sell specialized Knowledge Bases via USDT x402, allowing the local AI to maintain unlimited, expert-level knowledge depth without relying on cloud-based providers.
 
-**Flow: questions → speech-to-text (or typing) → AI evaluation → session summary.**
-![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@a8881a5a6ba112a06d458331ee1bf3f7b82899b3/uploads/2026-05-09T19-45-12-487Z-5gfynqvcj.png)
+##### Flow: questions → speech-to-text (or typing) → AI evaluation → session summary.
+
+![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@28e88232e250f9338a0b443ff89b200b3218a9f5/uploads/2026-05-09T19-56-48-774Z-scipa80hr.png)
 ---
 
 ## QVAC Capabilities Used
@@ -82,13 +83,13 @@ Knowledge base includes: STAR method examples, role-specific competencies, commo
 ---
 
 ### Marketplace Packs
-![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@d8485e7517f1595a8f59353a06dfe2c9e1723b30/uploads/2026-05-09T19-45-59-289Z-8908vu3sb.png)
+![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@369decb404e92b023e727d9bfc2093b97c7dfbd8/uploads/2026-05-09T20-01-09-561Z-p16t6axfa.png)
 AILokak's marketplace offers question packs tailored to specific careers, each with field-specific questions and evaluation criteria. Browse by industry, let the AI recommend based on your target job, and pay once with USDT0. Behind the scenes, purchased packs are embedded into a local RAG knowledge base via `@qvac/sdk` , so your interviewer knows what a great answer looks like in your field
 
 Each pack: role-specific questions, voice + text input, AI evaluation adapted to role context.
 
 ####  You can also get recommendation by your local AI!
-![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@eb82fe3501ac8501f3fe6d22d23d23bef54988c1/uploads/2026-05-09T19-47-14-633Z-ukglucar7.png)
+![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@c1c85313a0120847c215a06013de18f6ddf2747f/uploads/2026-05-09T19-54-10-886Z-qwamv5bi9.png)
 ---
 
 ### How Pack Purchase Works :  x402 + Tether WDK
@@ -110,7 +111,7 @@ Packs are gated by **x402**, a micropayment protocol built on Plasma Mainnet bec
 File written with `mode: 0o600` — readable only by the OS user running the app. Not tracked by git (lives outside the project directory in Electron `userData`).
 
 **What happens on purchase:**
-![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@2bc73d82900888b6cc0c926167dba05d489f63d1/uploads/2026-05-09T19-18-38-982Z-grz4q0rf7.png)
+![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@da47d75ebffc0c2efd487ce9b309eb6ec0f29107/uploads/2026-05-09T19-59-33-582Z-mapmo6cho.png)
 
 
 Pack server receives **only**: wallet address + payment proof. It has no access to your answers, voice data, or AI session.

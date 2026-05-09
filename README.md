@@ -64,7 +64,7 @@ const { embedding } = await embed({ modelId: embeddingsId, text: query })
 
 ### RAG Architecture
 
-AILokak uses Retrieval-Augmented Generation to ground every question and evaluation in real interview knowledge — not hallucinated advice.
+AILokak uses Retrieval-Augmented Generation to ground every question and evaluation in real interview knowledge (less AI hallucinations).
 
 ```
 User selects job role/topic
@@ -117,7 +117,7 @@ File written with `mode: 0o600` — readable only by the OS user running the app
 Pack server receives **only**: wallet address + payment proof. It has no access to your answers, voice data, or AI session.
 
 ---
-### Catalog Sync — Metadata Only, AI Stays Private
+### Catalog Sync : Metadata Only, AI Stays Private
 Pack metadata (titles, descriptions, prices, categories) lives on the pack server — not hardcoded in the app binary. This lets packs be updated or added without re-shipping the app.
 
 ```

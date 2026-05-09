@@ -1,0 +1,88 @@
+{
+  "id": "product-management",
+  "name": "Product Management",
+  "description": "Prioritization frameworks, roadmap decisions, metrics, and user empathy for PM roles.",
+  "category": "Product",
+  "questions_count": 10,
+  "inputMode": "both",
+  "price_usdt": 0.0001,
+  "author": "Priya Menon",
+  "mentor": {
+    "name": "Priya Menon",
+    "role": "Senior PM · Series B Fintech",
+    "avatar": "PM"
+  },
+  "industries": [
+    "tech",
+    "fintech",
+    "saas"
+  ],
+  "roles": [
+    "product-manager",
+    "product-owner",
+    "associate-pm",
+    "senior-pm"
+  ],
+  "questions": [
+    {
+      "category": "product",
+      "question": "Tell me about a time you had to say no to a feature request from a key stakeholder.",
+      "ideal_answer": "STAR: Describe the stakeholder and the request, explain your data-driven reasoning for declining (user research, opportunity cost, roadmap priority), detail how you communicated the decision with empathy and offered a concrete alternative or timeline, share the outcome and whether the relationship was maintained or strengthened.",
+      "evaluation_criteria": "Data-driven prioritization, stakeholder management, empathetic communication, alternatives offered, relationship preserved"
+    },
+    {
+      "category": "product",
+      "question": "How do you decide what to build next when everything feels equally important?",
+      "ideal_answer": "Describe a structured prioritization framework such as RICE (Reach, Impact, Confidence, Effort) or ICE. Explain how you gather signal from multiple sources: customer interviews, usage data, support tickets, revenue impact, strategic alignment. Detail how you align with leadership and communicate trade-offs. Emphasize that prioritization is a continuous process, not a one-time exercise.",
+      "evaluation_criteria": "Framework usage, multi-source signal gathering, stakeholder alignment, communication of trade-offs, iterative thinking"
+    },
+    {
+      "category": "product",
+      "question": "Walk me through how you define and measure success for a new feature.",
+      "ideal_answer": "Start by tying the feature to a business or user outcome. Define primary success metrics (activation rate, retention, revenue impact) and guardrail metrics (churn, support volume, error rates). Explain how you set a baseline, define the target improvement, and choose an observation window. Describe your evaluation process: A/B test where possible, qualitative signals alongside quantitative, and how you decide whether to iterate, scale, or kill the feature.",
+      "evaluation_criteria": "Outcome-first thinking, primary vs guardrail metrics, baseline and target setting, evaluation rigor, decision framework"
+    },
+    {
+      "category": "product",
+      "question": "Tell me about a product you launched that did not perform as expected. What did you do?",
+      "ideal_answer": "STAR: Describe the product or feature and its hypothesis. Explain the metrics that showed underperformance. Detail your investigation process: were the assumptions wrong, was the execution off, or was the market different? Describe how you communicated the situation to stakeholders, what you decided to do (iterate, pivot, or sunset), and what you learned about your product discovery process.",
+      "evaluation_criteria": "Accountability, hypothesis-driven thinking, investigation process, transparent communication, learning applied to future process"
+    },
+    {
+      "category": "behavioral",
+      "question": "How do you work with engineering when there is disagreement about scope or feasibility?",
+      "ideal_answer": "Explain that scope disagreements are healthy and expected. Describe how you approach the conversation: first listen to understand the technical constraints fully, then share the user and business context driving the requirement. Walk through how you explore options together, assess trade-offs, and find solutions that satisfy both product intent and engineering feasibility. Emphasize mutual respect and shared ownership of the outcome.",
+      "evaluation_criteria": "Listening first, context sharing, collaborative problem solving, respect for engineering, shared ownership"
+    },
+    {
+      "category": "product",
+      "question": "Describe your approach to user research. How do you decide when you have enough signal?",
+      "ideal_answer": "Describe a mixed-methods approach: qualitative research (user interviews, usability tests) for understanding the why, quantitative data (analytics, surveys) for validating at scale. Explain how you recruit representative users, structure interviews to avoid leading questions, and synthesize findings into actionable insights. On sufficiency: describe thematic saturation in qualitative research (new interviews stop revealing new themes) and statistical significance for quantitative. Mention the risk of over-researching as well as under-researching.",
+      "evaluation_criteria": "Mixed methods, representative recruiting, unbiased questioning, synthesis process, judgment on sufficiency"
+    },
+    {
+      "category": "product",
+      "question": "How do you communicate a product roadmap to different audiences — engineering, sales, and executives?",
+      "ideal_answer": "Explain that the core roadmap content is the same but the framing changes by audience. For engineering: detail the what and why, include dependencies and technical context, invite input on sequencing. For sales: focus on customer outcomes and competitive differentiation, give timelines they can use in customer conversations. For executives: lead with strategic alignment, business impact, and resource requirements. Describe how you maintain one source of truth while tailoring the presentation layer.",
+      "evaluation_criteria": "Audience awareness, consistent core with adapted framing, executive summary thinking, sales enablement, engineering partnership"
+    },
+    {
+      "category": "product",
+      "question": "Tell me about a time you used data to change the direction of a product decision.",
+      "ideal_answer": "STAR: Describe the initial direction or assumption. Explain what data you gathered and how (analytics, user research, experiments). Detail the insight that contradicted the assumption, how you validated it was signal not noise, and how you presented the case for changing direction. Share the outcome — what was built instead and whether it performed better.",
+      "evaluation_criteria": "Data gathering, signal validation, persuasive case making, willingness to change direction, outcome tracking"
+    },
+    {
+      "category": "situational",
+      "question": "A competitor just launched a feature your users are asking for. How do you respond?",
+      "ideal_answer": "First, resist the urge to react immediately. Assess how many users are actually asking for it versus how many are being influenced by the announcement. Evaluate whether solving this need aligns with your product strategy. If it does, determine whether to build it better (differentiated) or faster (parity). If it does not align, communicate clearly why you are choosing to stay focused. Use the competitor launch as a research input, not a roadmap directive.",
+      "evaluation_criteria": "Deliberate response over reactive, strategic alignment check, build better vs faster decision, clear communication, competitive awareness without panic"
+    },
+    {
+      "category": "product",
+      "question": "How do you balance short-term user requests with long-term product vision?",
+      "ideal_answer": "Describe a portfolio approach: allocate capacity explicitly across short-term (user-requested, high-urgency), medium-term (roadmap features), and long-term (vision bets). Explain how you evaluate short-term requests against strategic fit — some short-term requests accelerate the vision, others are distractions. Share how you communicate trade-offs to users who want fast responses and leadership who owns long-term strategy. Mention the risk of pure short-termism (feature factory) and pure long-termism (building in a vacuum).",
+      "evaluation_criteria": "Portfolio thinking, strategic fit evaluation, stakeholder communication, awareness of short- and long-term failure modes"
+    }
+  ]
+}

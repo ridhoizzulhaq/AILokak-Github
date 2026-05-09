@@ -1,0 +1,81 @@
+{
+  "id": "data-science",
+  "name": "Data Science",
+  "description": "Experimental design, model evaluation, and communicating findings to stakeholders.",
+  "category": "Technical",
+  "questions_count": 9,
+  "inputMode": "text",
+  "price_usdt": 0.0001,
+  "author": "Daniel Osei",
+  "mentor": {
+    "name": "Daniel Osei",
+    "role": "Staff Data Scientist · Top Tech Company",
+    "avatar": "DO"
+  },
+  "industries": [
+    "tech",
+    "finance",
+    "healthcare"
+  ],
+  "roles": [
+    "data-scientist",
+    "ml-engineer",
+    "data-analyst"
+  ],
+  "questions": [
+    {
+      "category": "technical",
+      "question": "Walk me through how you would design an A/B test for a new recommendation algorithm.",
+      "ideal_answer": "Define the hypothesis and primary success metric (CTR, session length, conversion). Determine sample size using power analysis based on expected effect size and acceptable false positive rate (typically α = 0.05, power = 0.8). Explain randomization unit (user-level vs session-level) and why it matters for variance reduction. Set the observation window accounting for novelty effects. Define guardrail metrics. Describe how you would analyze results: check for sample ratio mismatch, test for statistical significance, segment analysis for heterogeneous treatment effects. Explain the decision framework: when to ship, iterate, or abandon.",
+      "evaluation_criteria": "Power analysis, randomization rigor, guardrail metrics, SRM check, segmentation, decision framework"
+    },
+    {
+      "category": "technical",
+      "question": "How do you handle missing data in a dataset before building a model?",
+      "ideal_answer": "First understand why data is missing: MCAR (missing completely at random), MAR (missing at random conditional on observed data), or MNAR (missing not at random). MCAR allows simple imputation. MAR allows model-based imputation (multiple imputation, KNN). MNAR requires domain-driven handling. Techniques: mean/median imputation for MCAR with low missingness, iterative imputation (MICE) for MAR, creating missingness indicator features, or domain-specific rules. Warn about data leakage if imputation uses test set statistics. Validate that imputation does not distort distributions meaningfully.",
+      "evaluation_criteria": "Understanding of missing mechanisms, technique selection per mechanism, leakage awareness, distribution validation"
+    },
+    {
+      "category": "technical",
+      "question": "Explain how you would detect and handle data leakage in a machine learning pipeline.",
+      "ideal_answer": "Data leakage means information from the future or target leaks into training features. Common sources: target-derived features, time-series splits done incorrectly (random split instead of temporal), imputation computed on the full dataset before splitting, features created from aggregations that include the target period. Detection: implausibly high validation scores, features that are highly correlated with the target but should not be causal, performance collapse at inference time. Prevention: strict temporal splits for time-series, pipelines that fit preprocessing only on training data, careful feature audits, monitoring training vs production feature distributions.",
+      "evaluation_criteria": "Understanding of leakage sources, detection signals, prevention techniques, pipeline discipline, train-test distribution monitoring"
+    },
+    {
+      "category": "technical",
+      "question": "How do you communicate a complex model finding to a non-technical business stakeholder?",
+      "ideal_answer": "Lead with the business outcome, not the methodology. Use concrete analogies to explain model behavior. Replace 'the model predicts churn probability of 0.73' with 'these customers are about three times more likely to cancel in the next 30 days than an average customer.' Show the business impact in dollar or percentage terms. Use visuals: confusion matrices become 'out of every 100 customers we flagged, 80 actually churned.' Anticipate questions about reliability and fairness. Tie the recommendation to a specific action the stakeholder can take.",
+      "evaluation_criteria": "Business-first framing, concrete analogies, impact quantification, visual clarity, action orientation, anticipating concerns"
+    },
+    {
+      "category": "technical",
+      "question": "You build a model that performs well on your test set but degrades in production. What do you investigate?",
+      "ideal_answer": "This is a training-serving skew problem. Investigate: (1) Feature distribution shift — compare training feature distributions to live feature distributions. (2) Label shift — has the distribution of the target variable changed? (3) Data pipeline issues — are features being computed the same way in training and serving? (4) Temporal drift — if the model was trained on old data, has the world changed? (5) Selection bias — is the population getting scored different from the training population? Remedies: retraining schedule, feature monitoring dashboards, shadow mode deployment, online learning, and model refresh cadence.",
+      "evaluation_criteria": "Training-serving skew understanding, feature drift, label shift, pipeline consistency, monitoring approach, remediation strategies"
+    },
+    {
+      "category": "technical",
+      "question": "What is the difference between precision and recall, and when would you optimize for each?",
+      "ideal_answer": "Precision is the fraction of positive predictions that are actually positive (TP / (TP + FP)). Recall is the fraction of actual positives that are correctly identified (TP / (TP + FN)). Optimize for precision when false positives are costly: spam detection (legitimate email flagged as spam), fraud blocking (blocking a real transaction). Optimize for recall when false negatives are costly: cancer screening (missing a cancer case), fraud detection review queues (missing fraud). In practice, use F1 or F-beta to balance both, or set a minimum threshold for one and maximize the other. Always tie the metric choice to business cost of each error type.",
+      "evaluation_criteria": "Correct definitions, business cost framing, precision-first vs recall-first scenarios, F-beta usage, threshold thinking"
+    },
+    {
+      "category": "technical",
+      "question": "Describe a time you built a model that had a meaningful business impact. What made it successful?",
+      "ideal_answer": "STAR: Describe the business problem clearly — not the technical problem. Explain how you scoped it into an ML problem (formulation, labels, features). Detail your modeling approach and validation strategy. Quantify the business impact (revenue lift, cost savings, efficiency gain). Reflect on what made it successful: clear problem definition, stakeholder alignment early, robust validation, smooth production handoff, and monitoring post-deployment. If there were failures along the way, describe how you adapted.",
+      "evaluation_criteria": "Business problem framing, ML problem formulation, validation rigor, quantified impact, production thinking, retrospective honesty"
+    },
+    {
+      "category": "technical",
+      "question": "How do you select features for a model and avoid overfitting?",
+      "ideal_answer": "Feature selection approaches: filter methods (correlation, mutual information), wrapper methods (recursive feature elimination), embedded methods (L1 regularization, tree feature importance). To avoid overfitting: use cross-validation instead of a single holdout, regularization (L1/L2/dropout for neural nets), reduce model complexity when validation performance diverges from training, early stopping, and ensembling. Watch for overfitting in validation selection itself — use a separate test set that is never used for hyperparameter tuning. Monitor the gap between train and validation metrics as a primary signal.",
+      "evaluation_criteria": "Feature selection methods, regularization techniques, cross-validation discipline, test set hygiene, train-validation gap monitoring"
+    },
+    {
+      "category": "situational",
+      "question": "Your manager asks you to show that a new data science initiative is working. The results are ambiguous. What do you do?",
+      "ideal_answer": "Resist the pressure to cherry-pick favorable metrics. First, clarify with your manager what 'working' means — was a success metric agreed upon at the start? If not, that is the root issue to fix going forward. Present the full picture: what the data shows, what is uncertain, and what would be needed to get a clearer answer (more time, more data, a cleaner experiment). Propose a framework for how you will know it is working in the future. Being honest about ambiguity is more credible than manufacturing a narrative.",
+      "evaluation_criteria": "Intellectual honesty, root cause of ambiguity, full picture presentation, success metric definition, forward-looking clarity"
+    }
+  ]
+}

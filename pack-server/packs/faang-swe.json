@@ -1,0 +1,116 @@
+{
+  "id": "faang-swe",
+  "name": "FAANG Software Engineer",
+  "description": "Distributed systems, system design, and senior-level technical depth for top-tier SWE roles.",
+  "category": "Technical",
+  "questions_count": 15,
+  "inputMode": "text",
+  "price_usdt": 0.0001,
+  "author": "James Nguyen",
+  "mentor": {
+    "name": "James Nguyen",
+    "role": "Principal Engineer · Big Tech",
+    "avatar": "JN"
+  },
+  "industries": [
+    "tech"
+  ],
+  "roles": [
+    "software-engineer",
+    "senior-engineer",
+    "staff-engineer",
+    "principal-engineer"
+  ],
+  "questions": [
+    {
+      "category": "technical",
+      "question": "How would you design a distributed rate limiter that works across multiple data centers?",
+      "ideal_answer": "Discuss algorithm options: token bucket (bursty traffic friendly), sliding window counter (more precise), fixed window (simpler, prone to boundary spikes). Explain the distributed challenge: each data center needs to enforce a global limit without high-latency coordination. Approaches: (1) Centralized Redis with replication — simple but latency risk for cross-region calls. (2) Local approximation — each data center enforces a fraction of the global limit; works well under uniform traffic distribution. (3) Gossip protocol for soft synchronization with local enforcement — eventual consistency with bounded error. Discuss trade-offs: strict consistency vs latency vs throughput. Choose based on whether over-counting or under-counting is more acceptable for the use case.",
+      "evaluation_criteria": "Algorithm knowledge, distributed consistency challenge, multiple approach options, trade-off analysis, use-case driven recommendation"
+    },
+    {
+      "category": "technical",
+      "question": "Design a system like YouTube's view count — it needs to be fast, eventually consistent, and globally scalable.",
+      "ideal_answer": "Requirement clarification: do we need exact counts or approximate? How stale is acceptable? Read-heavy or write-heavy? Architecture: (1) Write path — each view event goes to a message queue (Kafka). Consumers aggregate counts in memory over short windows and periodically flush to a distributed counter store (e.g., Redis INCR or Cassandra counter columns). (2) Read path — serve counts from a CDN-cached layer; update cache on a schedule (e.g., every 30 seconds). (3) For creator dashboard (higher accuracy): read from the aggregation layer directly with slightly higher latency. Address: count deduplication for replay attacks, regional aggregation before global merge, and long-tail content vs viral content access patterns.",
+      "evaluation_criteria": "Requirement clarification, write vs read path separation, queue-based aggregation, caching strategy, deduplication, traffic pattern handling"
+    },
+    {
+      "category": "technical",
+      "question": "Tell me about a time you identified and resolved a significant performance bottleneck in a production system.",
+      "ideal_answer": "STAR: Describe the system and how the bottleneck manifested (latency spike, error rate increase, throughput cap). Detail your investigation: profiling tools used, metrics examined (CPU, memory, I/O, lock contention, GC pauses, slow query logs). Explain how you isolated the root cause from symptoms. Describe the fix: algorithmic change, caching layer addition, query optimization, connection pool tuning, or architectural change. Quantify the improvement with before/after metrics. Describe how you validated the fix did not introduce regressions and what monitoring you put in place.",
+      "evaluation_criteria": "Systematic investigation, tool usage, root cause vs symptom distinction, fix description, quantified improvement, regression prevention, monitoring"
+    },
+    {
+      "category": "technical",
+      "question": "How does garbage collection work in a JVM or similar runtime, and how can it affect a latency-sensitive service?",
+      "ideal_answer": "Explain generational GC: most objects die young (nursery/young gen), survivors graduate to old gen. Minor GC (young gen) is fast and frequent; major/full GC (old gen) is slow and causes stop-the-world pauses. Modern collectors (G1, ZGC, Shenandoah) aim to reduce pause times by doing more work concurrently. Impact on latency-sensitive services: GC pauses cause latency spikes (p99 / p999 degradation), not average latency. Mitigation strategies: right-size heap (larger heap = less frequent GC but longer pauses when they happen), tune young/old gen ratio, choose low-pause collector (ZGC), reduce allocation rate (object pooling, value types), monitor GC logs and alert on long pauses. For extreme latency requirements: off-heap memory management.",
+      "evaluation_criteria": "Generational GC mechanics, pause type understanding, modern collector awareness, latency tail impact, mitigation strategies, monitoring approach"
+    },
+    {
+      "category": "technical",
+      "question": "Design a real-time collaborative editing system like Google Docs.",
+      "ideal_answer": "Core challenge: concurrent edits to a shared document must converge to the same state on all clients. Approaches: (1) Operational Transformation (OT) — transform operations against concurrent operations to maintain intent. Used historically by Google Docs. Complex to implement correctly for n-way concurrency. (2) CRDTs (Conflict-free Replicated Data Types) — data structures that can be merged without coordination; no central server required for merging. Modern approach (Figma, Linear). Architecture: WebSocket connections for real-time broadcast, a persistent operational log for history, server as authoritative conflict resolver (OT) or as relay (CRDT), presence indicators via separate pub/sub channel, versioned snapshots for performance, offline edit queue with sync-on-reconnect.",
+      "evaluation_criteria": "OT vs CRDT trade-off knowledge, real-time transport choice, server role, offline handling, presence system, snapshot strategy"
+    },
+    {
+      "category": "technical",
+      "question": "How do you approach code review — both as the author and as the reviewer?",
+      "ideal_answer": "As author: write a clear PR description with context on why, not just what. Keep PRs small and focused (under 400 lines changed). Add inline comments to explain non-obvious choices preemptively. Run tests and linting before requesting review. Respond to all comments, even if just to acknowledge. As reviewer: read the PR description first to understand intent. Focus on correctness, security, and maintainability — not style (that is what linters are for). Ask questions rather than issuing mandates. Distinguish blocking issues from optional suggestions. Review the tests, not just the code. Approve when confident in correctness, not when perfect by your own preferences. Time-box reviews to maintain team velocity.",
+      "evaluation_criteria": "Author preparation, small focused PRs, reviewer intent focus, blocking vs optional distinction, test review, velocity awareness, collaborative tone"
+    },
+    {
+      "category": "technical",
+      "question": "Explain the CAP theorem and describe a real system where you had to choose between consistency and availability.",
+      "ideal_answer": "CAP theorem: in a distributed system, you cannot simultaneously guarantee Consistency (every read returns the latest write), Availability (every request gets a non-error response), and Partition Tolerance (the system continues operating despite network partitions). Since partitions happen in any distributed system, the real trade-off is between consistency and availability during a partition. CP systems (Zookeeper, HBase): reject requests during partition to preserve consistency. AP systems (Cassandra, DynamoDB with eventual consistency): serve stale data during partition to maintain availability. In practice, PACELC extends CAP: even without partitions, there is a latency vs consistency trade-off. Real example: a shopping cart should be AP (losing availability costs sales, stale cart is acceptable); a financial ledger should be CP (stale balance is dangerous).",
+      "evaluation_criteria": "Correct CAP definition, partition tolerance acknowledgment, CP vs AP examples, PACELC awareness, business-driven selection, real use case"
+    },
+    {
+      "category": "technical",
+      "question": "How would you architect a feature flag system for a large-scale application with thousands of flags and millions of users?",
+      "ideal_answer": "Requirements: millisecond evaluation latency, no external call per request, targeting by user attributes (id, segment, cohort, percentage), audit log of flag changes, instant rollout/rollback, SDKs for multiple languages. Architecture: (1) Control plane — admin UI, flag configuration storage (DB), change audit log, webhook-based event system. (2) Data plane — SDK fetches flag definitions on startup and maintains a local in-memory cache. Flag evaluation is entirely local (no network hop). Cache refreshes periodically and on change events (SSE or WebSocket). (3) Targeting engine — boolean flags, percentage rollouts (hash user id + flag key for consistent bucketing), segment targeting, multi-variate flags. (4) Analytics — impression and exposure logging asynchronously. Address: flag explosion (governance, archiving old flags), consistency across SDK versions.",
+      "evaluation_criteria": "Local evaluation for latency, cache refresh strategy, targeting engine design, audit logging, SDK consistency, flag governance"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to ramp up on an unfamiliar large codebase quickly.",
+      "ideal_answer": "STAR: Describe the codebase scale and your starting familiarity. Explain your learning strategy: start with the entry points and follow the request path end-to-end, read tests to understand expected behavior rather than just reading implementation, draw architecture diagrams to build a mental model, ask targeted questions rather than general ones, make small contributions (bug fixes, documentation) to build real understanding. Share how long it took to become productive and what made the biggest difference in acceleration. Mention how this experience changed how you onboard others.",
+      "evaluation_criteria": "Entry-point strategy, test reading habit, architecture visualization, targeted questioning, small contribution ramp, knowledge transfer to others"
+    },
+    {
+      "category": "technical",
+      "question": "How do you ensure a system remains observable and debuggable as it grows in complexity?",
+      "ideal_answer": "Three pillars: Logs (structured JSON logs with correlation IDs, severity levels, context — not log.info('something happened')), Metrics (RED method: Rate, Errors, Duration per service; USE method: Utilization, Saturation, Errors per resource; dashboards for on-call), Traces (distributed tracing with OpenTelemetry to follow a request across service boundaries and identify latency sources). Beyond the three pillars: define SLOs and alert on error budget burn rate, implement canary deployments and feature flags for safe rollouts, add health endpoints and circuit breakers, write runbooks for common alert scenarios. Design observability in from day one — it is much harder to retrofit.",
+      "evaluation_criteria": "Three pillars knowledge (logs/metrics/traces), RED/USE methods, distributed tracing, SLO and error budget alerting, operational runbooks, retrofit difficulty awareness"
+    },
+    {
+      "category": "technical",
+      "question": "Describe your approach to handling backward compatibility when evolving a public API.",
+      "ideal_answer": "Principles: never remove or rename fields in existing API versions, never change field semantics, add new fields as optional, add new endpoints rather than changing existing ones. Versioning strategies: URL versioning (/v1/, /v2/) — explicit and easy to route; header versioning (Accept: application/vnd.api+json;v=2) — cleaner URLs but harder to debug. Deprecation process: announce deprecation with timeline, add Deprecation headers to responses, monitor usage of deprecated endpoints, communicate directly with heavy users, sunset only after usage reaches zero or acceptable threshold. For breaking changes: maintain multiple versions simultaneously, provide migration guides, use API gateway to route and transform between versions. Never break a customer without notice.",
+      "evaluation_criteria": "Additive-only evolution principle, versioning strategy trade-offs, deprecation process, sunset discipline, communication, no-surprise rule"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you disagreed strongly with a technical decision made by your team. What did you do?",
+      "ideal_answer": "STAR: Describe the decision and the nature of your disagreement (technical risk, maintainability, performance concern). Explain how you raised the concern: sought first to understand the reasoning behind the decision fully before criticizing, then presented your concern with specific technical evidence and risk assessment. Describe the conversation — did they have context you lacked, or did you persuade them to reconsider? If overruled: explain how you committed to the decision and executed it professionally while documenting your concern. If validated: share the outcome. Reflect on what the experience taught you about technical discourse.",
+      "evaluation_criteria": "Understanding before critiquing, evidence-based objection, risk articulation, professional commitment if overruled, outcome, learning"
+    },
+    {
+      "category": "technical",
+      "question": "How would you design the data model for a social network's activity feed?",
+      "ideal_answer": "Core challenge: high write fanout vs high read fanout. Approaches: (1) Pull model (read-time fan-out) — on feed request, fetch activities from all followed users and merge. Simple writes, expensive reads. Works for low-follower-count users. (2) Push model (write-time fan-out) — on new activity, write to every follower's feed list. Expensive writes (celebrity problem), cheap reads. (3) Hybrid — push for regular users, pull for celebrities (accounts with >N followers). Data model: Activity table (id, actor_id, verb, object_id, object_type, target_id, created_at). Feed table per user (user_id, activity_id, created_at) for push targets. Index on (user_id, created_at) for pagination. Store only activity IDs in feed tables; hydrate full objects at read time to avoid denormalization staleness. TTL old feed entries.",
+      "evaluation_criteria": "Pull vs push trade-offs, hybrid model for celebrity problem, activity table design, feed table design, hydration at read time, TTL management"
+    },
+    {
+      "category": "technical",
+      "question": "What is your mental model for choosing between SQL and NoSQL databases for a new service?",
+      "ideal_answer": "Start with requirements, not technology preference. SQL strengths: strong consistency (ACID), complex relational queries and joins, mature tooling, schema enforcement, foreign key integrity. Use when: data is relational, queries are complex and varied, consistency is critical (financial, inventory). NoSQL strengths: horizontal scalability, flexible schema, high write throughput, low-latency key lookups, native support for specific data models (document, wide-column, graph, time-series). Use when: access patterns are simple and known upfront, scale requirements exceed vertical SQL limits, data model is hierarchical or document-shaped. Anti-pattern: choosing NoSQL 'for scale' before SQL has become the bottleneck. Prefer boring technology that your team knows. The best database is the one you can operate.",
+      "evaluation_criteria": "Requirements-first decision, SQL strengths and use cases, NoSQL strengths and use cases, anti-pattern awareness, operational familiarity as a factor"
+    },
+    {
+      "category": "technical",
+      "question": "How do you approach building a service that must handle 10x the current expected load?",
+      "ideal_answer": "First question: is 10x a realistic target or a safety margin? Understand the load profile: steady-state vs peak, read-heavy vs write-heavy, latency requirements. Then: (1) Establish the current baseline capacity of the system. (2) Identify the bottlenecks: load test to failure, profile, find the first constraint. (3) Eliminate the bottleneck before provisioning more of everything. (4) Design for horizontal scalability: stateless services, externalize session state, shard the database, use async processing for non-critical paths. (5) Cache aggressively at the right layer. (6) Use load shedding and circuit breakers rather than letting downstream failures cascade. Avoid over-engineering for 10x if 2x is the realistic case — premature optimization compounds complexity.",
+      "evaluation_criteria": "Load profile characterization, baseline measurement, bottleneck-first approach, horizontal scalability design, caching, load shedding, premature optimization warning"
+    }
+  ]
+}

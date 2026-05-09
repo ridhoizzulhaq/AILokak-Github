@@ -1,0 +1,23 @@
+{
+  "name": "lokakai-pack-server",
+  "version": "1.0.0",
+  "description": "LokakAI pack server with x402/T402 paywall",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@t402/core": "^2.0.0",
+    "@t402/evm": "^2.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0"
+  }
+}

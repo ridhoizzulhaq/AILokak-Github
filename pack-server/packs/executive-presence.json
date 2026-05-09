@@ -1,0 +1,68 @@
+{
+  "id": "executive-presence",
+  "name": "Executive Presence",
+  "description": "Senior-level influence, vision communication, board presentations, and org navigation.",
+  "category": "Leadership",
+  "questions_count": 7,
+  "inputMode": "audio",
+  "price_usdt": 0.0001,
+  "author": "Margaret Lin",
+  "mentor": {
+    "name": "Margaret Lin",
+    "role": "VP Engineering · SaaS Scale-up",
+    "avatar": "ML"
+  },
+  "industries": [
+    "all"
+  ],
+  "roles": [
+    "vp",
+    "director",
+    "c-suite",
+    "general-manager"
+  ],
+  "questions": [
+    {
+      "category": "leadership",
+      "question": "Describe a time you had to present a controversial strategy to a board or senior leadership.",
+      "ideal_answer": "STAR: Set the context — what made the strategy controversial (cost, risk, market disruption, deviation from current direction). Explain your preparation: pre-alignment with key stakeholders before the formal presentation, anticipating objections, preparing data to back each claim. Describe the presentation approach: led with the desired outcome, acknowledged the risk explicitly rather than hiding it, presented the risk mitigation plan. Detail how you handled pushback in the room. Share the decision outcome and what you would refine about your approach.",
+      "evaluation_criteria": "Pre-alignment discipline, transparent risk acknowledgment, data preparation, in-room pushback handling, outcome and reflection"
+    },
+    {
+      "category": "leadership",
+      "question": "How do you communicate a difficult message — like missed targets or a significant setback — to your organization?",
+      "ideal_answer": "Lead with facts, not spin. State what happened clearly and early in the communication — do not bury the bad news after paragraphs of context. Take accountability where appropriate without excessive self-flagellation. Explain the root cause analysis: what happened and why. Detail the recovery plan with concrete steps and timelines. Express confidence grounded in the plan, not in empty optimism. Give people a way to contribute to the recovery. Follow up consistently.",
+      "evaluation_criteria": "Directness, accountability, root cause clarity, concrete recovery plan, grounded confidence, follow-through commitment"
+    },
+    {
+      "category": "leadership",
+      "question": "Tell me about a time you influenced a decision at a level above your formal authority.",
+      "ideal_answer": "STAR: Describe the decision and why you had a stake in it without having formal authority over it. Explain how you built credibility: established expertise, track record, trusted relationships with the decision makers. Detail your influence approach: understood their priorities and framed your perspective in terms that mattered to them, used data to support your position, sought allies who shared the view, found the right moment and format (1:1 vs group, written vs verbal). Share the outcome and what you learned about influencing up.",
+      "evaluation_criteria": "Credibility building, stakeholder priority mapping, framing for audience, coalition building, timing judgment, outcome"
+    },
+    {
+      "category": "leadership",
+      "question": "How do you maintain composure and lead effectively during a crisis?",
+      "ideal_answer": "Describe a crisis leadership framework: (1) Establish facts before acting — resist the urge to respond before you understand the situation. (2) Communicate early and frequently — silence breeds fear; give people what you know and what you are doing. (3) Delegate by strength — identify who is best positioned to own each workstream. (4) Protect your team from noise — absorb pressure from above so your team can focus. (5) Maintain visible calm — your emotional state sets the tone. Detail a specific example where you applied this and what the outcome was.",
+      "evaluation_criteria": "Facts-first discipline, early communication, delegation by strength, team protection, emotional regulation, specific example"
+    },
+    {
+      "category": "leadership",
+      "question": "Describe a time you had to change a deeply held organizational belief or cultural practice.",
+      "ideal_answer": "STAR: Identify the belief and why it needed to change (data showing it was harmful, external market shift, strategy change). Explain how you diagnosed why the belief was held (history, identity, past success). Detail your change strategy: built a coalition of early believers, created safe spaces to question the assumption, used data to show the cost of the status quo, found a pilot or proof of concept to demonstrate the alternative, and celebrated early wins publicly. Describe resistance you encountered and how you navigated it. Share the long-term outcome.",
+      "evaluation_criteria": "Change diagnosis, coalition building, data-driven case, pilot thinking, resistance navigation, sustained change outcome"
+    },
+    {
+      "category": "leadership",
+      "question": "How do you make decisions when you have incomplete information and high stakes?",
+      "ideal_answer": "Describe a structured approach: first, identify the decision type — is it reversible or irreversible? Reversible decisions should be made quickly with available information. Irreversible decisions warrant more information gathering, but still with a time bound. Use a pre-mortem: imagine the decision failed and work backward to identify risks. Consult people with relevant expertise and diverse perspectives without seeking consensus at the cost of speed. Be explicit about what you know, what you are assuming, and what you are accepting as risk. Communicate the decision clearly with the reasoning so others can course-correct if they see something you missed.",
+      "evaluation_criteria": "Reversibility as a decision variable, pre-mortem thinking, diverse consultation, explicit assumption documentation, clear communication with reasoning"
+    },
+    {
+      "category": "leadership",
+      "question": "Tell me about a time you had to build alignment among leaders who had conflicting priorities.",
+      "ideal_answer": "STAR: Describe the conflict — ideally one where both sides had legitimate positions, not one where one side was clearly wrong. Explain your process for understanding each perspective: met with each stakeholder individually to understand their underlying interests beneath their stated positions. Identified the shared higher-level goal that both parties agreed on. Designed a process to reach alignment: structured joint working session, mediating trade-off conversations, sometimes bringing in objective data. Describe the agreement reached and whether it held over time.",
+      "evaluation_criteria": "Understanding underlying interests, shared goal identification, structured facilitation, trade-off mediation, durable alignment"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "startup-general",
+  "name": "Startup All-Rounder",
+  "description": "Building under ambiguity, resource constraints, culture, and wearing multiple hats.",
+  "category": "Behavioral",
+  "questions_count": 10,
+  "inputMode": "both",
+  "price_usdt": 0.0001,
+  "author": "Tariq Hassan",
+  "mentor": {
+    "name": "Tariq Hassan",
+    "role": "Co-founder · 2× Backed Startup",
+    "avatar": "TH"
+  },
+  "industries": [
+    "startup"
+  ],
+  "roles": [
+    "all"
+  ],
+  "questions": [
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to build something from scratch with no playbook.",
+      "ideal_answer": "STAR: Describe the context — what existed before (nothing) and what was needed. Explain how you structured your approach despite the lack of precedent: identified the core problem to solve, talked to people who would use it, made the first version as small as possible, iterated based on feedback. Describe what failed and how you adapted. Share the outcome and what you learned about building in uncertainty that you would carry forward. Emphasize resourcefulness and comfort with not knowing the answer in advance.",
+      "evaluation_criteria": "Problem-first approach, customer-driven design, minimum viable scope, iteration on feedback, failure acknowledgment and adaptation, learning about uncertainty"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you had to do more with significantly less — tighter budget, smaller team, or shorter timeline than you needed.",
+      "ideal_answer": "STAR: Describe the constraint clearly and its severity. Explain your prioritization: identified the absolute minimum to achieve the core outcome, cut everything else without apology. Detail how you used the constraint creatively — constraints often force better solutions. Describe what you negotiated versus what you accepted. Share the outcome and whether the constraint ultimately improved the result or required a meaningful trade-off that you would be honest about.",
+      "evaluation_criteria": "Core outcome identification, ruthless prioritization, constraint as creative force, negotiation vs acceptance, honest trade-off assessment"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you wore multiple hats and had to quickly become competent in something outside your core expertise.",
+      "ideal_answer": "STAR: Identify the domain and the gap between your existing expertise and what was needed. Explain how you accelerated competence: talked to domain experts, identified the most critical things to understand first, avoided the trap of learning everything before starting, made small moves to test your emerging understanding. Describe how you communicated your knowledge boundary to teammates and stakeholders — knowing what you do not know is a skill. Share the outcome and whether you chose to build permanent expertise or hand off when the organization matured.",
+      "evaluation_criteria": "Learning acceleration strategy, expert consultation, critical knowledge first, knowledge boundary communication, strategic expertise vs handoff decision"
+    },
+    {
+      "category": "situational",
+      "question": "How would you prioritize features when you have a long wishlist, limited engineering capacity, and customers with conflicting needs?",
+      "ideal_answer": "Start by separating wants from needs: which requests, if not addressed, cause customers to leave or fail to adopt? Those are your needs. Segment customers by their value (revenue, strategic importance, reference value) — not all customers should have equal weight in your roadmap. Use a lightweight framework (impact / effort or RICE) to score the shortlist. Look for features that multiple customers want independently — that is signal. Build the smallest version of each winning feature that tests the hypothesis. Communicate the roadmap and rationale to customers you are not serving this cycle — they respect transparency more than silence.",
+      "evaluation_criteria": "Want vs need separation, customer segmentation by value, scoring framework, independent demand signal, hypothesis testing, transparent communication with un-served customers"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you had to make a consequential decision quickly with minimal information.",
+      "ideal_answer": "STAR: Describe the decision and the time pressure. Explain your process: identified what would be hardest to reverse (prioritized reversibility as a decision criterion), gathered the two or three most critical pieces of information available in the time window, made an explicit list of what you were assuming, and committed to the decision clearly. Describe the outcome. Reflect on whether in hindsight the right pieces of information were gathered and what the experience taught you about fast decision-making.",
+      "evaluation_criteria": "Reversibility-first criterion, critical information triage, explicit assumption documentation, commitment clarity, retrospective accuracy assessment"
+    },
+    {
+      "category": "situational",
+      "question": "A key early employee wants to leave. How do you handle the conversation?",
+      "ideal_answer": "First, listen without defensiveness — understand the real reason, which is often not the stated reason. Is it compensation, growth trajectory, a specific relationship issue, or loss of excitement? Assess honestly whether the root cause is something the company can and should address, versus something that reflects a legitimate mismatch. If it is addressable, present a concrete plan (not promises) and be honest about the timeline. If it is not addressable — the company is going in a direction that does not fit what this person needs — be honest about that too. Negotiate a transition that protects the team's work continuity. Treat them as a person, not a resource.",
+      "evaluation_criteria": "Non-defensive listening, real reason exploration, honest addressability assessment, concrete plan vs promises, honest mismatch acknowledgment, transition planning, human treatment"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time your startup hypothesis was wrong. How did you respond?",
+      "ideal_answer": "STAR: Describe the hypothesis clearly — what you believed and why. Explain what evidence invalidated it: was it a single decisive signal or accumulation of small signals? Describe the emotional challenge of letting go of a belief you had invested in. Detail how you decided between pivoting (new direction with existing assets) and persevering (finding a different way to validate the original thesis). Share the outcome of the decision. Reflect on what the experience taught you about hypothesis-driven building and when to kill an idea.",
+      "evaluation_criteria": "Hypothesis clarity, evidence characterization, emotional honesty, pivot vs persevere framework, decision outcome, learning about kill criteria"
+    },
+    {
+      "category": "situational",
+      "question": "How do you build culture deliberately in a small, fast-growing team where you are adding people every month?",
+      "ideal_answer": "Culture is built by what you tolerate, reward, and model — not by what you write in a values document. In a fast-growing team: make hiring decisions partly on culture fit (not clone culture, but values alignment), because each new person shifts the culture by definition. Be explicit about values early: write them down, but more importantly act them out publicly. Name cultural moments when you see them — celebrate behavior that represents the culture you want, address behavior that contradicts it immediately. Onboarding is the most powerful cultural moment — invest in it. Document decisions and their reasoning so latecomers can understand how the team thinks.",
+      "evaluation_criteria": "Culture-by-behavior not values-documents, hiring as culture decision, explicit early articulation, naming cultural moments, onboarding investment, decision documentation"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you had to say no to a customer or investor request that you knew would derail the company.",
+      "ideal_answer": "STAR: Describe the request and why it was tempting (revenue, relationship, validation) and why it would have been harmful (strategic distraction, technical debt, wrong user segment). Explain your reasoning process for deciding to decline. Detail how you communicated the no: with honesty about the reason, without burning the relationship, and with an alternative where one existed. Share how the relationship held up. Reflect on whether the decision held over time and whether you would make the same call again.",
+      "evaluation_criteria": "Honest temptation acknowledgment, harm reasoning, communication with relationship preservation, alternative offering, relationship outcome, retrospective conviction"
+    },
+    {
+      "category": "situational",
+      "question": "You are running out of runway and need to cut burn significantly. How do you approach this?",
+      "ideal_answer": "Do not optimize for popularity — optimize for survival. First, build a clear picture of runway at current burn and at 50% burn: how many months does each scenario buy? Identify the core bets the company is making and the minimum team and investment needed to test each bet. Cut everything else, starting with the highest cost items that are furthest from the core. If headcount needs to be reduced: do it once, cut deeper than feels comfortable, communicate with honesty and dignity — do not leak or string people along. After cuts, reset the team around the refined focus and communicate the new plan with conviction. Negotiate extended payment terms with vendors in parallel. Update investors immediately and accurately.",
+      "evaluation_criteria": "Runway clarity, core bet identification, ruthless non-core cutting, headcount decision discipline, one-time cut deeper principle, honest communication, vendor and investor management"
+    }
+  ]
+}

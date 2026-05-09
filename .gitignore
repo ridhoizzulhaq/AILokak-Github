@@ -1,0 +1,19 @@
+node_modules
+dist
+out
+out_esm_test
+.DS_Store
+.eslintcache
+*.log*
+*.tsbuildinfo
+
+# Piper TTS binary (download separately, see README)
+resources/en_US-ryan-high.onnx
+resources/en_US-ryan-high.onnx.json
+
+# Env secrets
+.env
+.env.*
+
+# Pack server dependencies
+pack-server/node_modules

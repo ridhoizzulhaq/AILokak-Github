@@ -1,0 +1,101 @@
+{
+  "id": "banking-finance",
+  "name": "Banking & Finance",
+  "description": "DCF valuation, credit analysis, capital markets, and financial communication for finance roles.",
+  "category": "Technical",
+  "questions_count": 12,
+  "inputMode": "text",
+  "price_usdt": 0.0001,
+  "author": "Connor Walsh",
+  "mentor": {
+    "name": "Connor Walsh",
+    "role": "Associate · Bulge Bracket Bank",
+    "avatar": "CW"
+  },
+  "industries": [
+    "finance",
+    "banking",
+    "private-equity",
+    "investment-banking"
+  ],
+  "roles": [
+    "analyst",
+    "associate",
+    "portfolio-manager",
+    "credit-analyst"
+  ],
+  "questions": [
+    {
+      "category": "technical",
+      "question": "Walk me through how you would value a company using DCF analysis.",
+      "ideal_answer": "DCF values a company as the present value of all future free cash flows. Steps: (1) Project free cash flows for an explicit forecast period (5-10 years). FCF = EBIT * (1 - tax rate) + D&A - CapEx - change in working capital. (2) Determine the discount rate (WACC = weight of equity * cost of equity + weight of debt * cost of debt after-tax). Cost of equity from CAPM: risk-free rate + beta * equity risk premium. (3) Calculate terminal value using Gordon Growth Model (FCF_final * (1 + g) / (WACC - g)) or exit multiple. (4) Discount all projected FCFs and terminal value to present value. (5) Add non-operating assets and subtract net debt to get equity value; divide by shares outstanding for per-share value. (6) Perform sensitivity analysis on WACC and terminal growth rate, as these have the largest impact on valuation.",
+      "evaluation_criteria": "FCF definition, WACC construction, CAPM for cost of equity, terminal value methods, sensitivity analysis, equity bridge"
+    },
+    {
+      "category": "technical",
+      "question": "Explain the difference between enterprise value and equity value, and when you use each.",
+      "ideal_answer": "Enterprise Value (EV) is the total value of the business irrespective of capital structure — it is what an acquirer pays for the entire enterprise. EV = market cap + total debt + preferred stock + minority interest - cash and equivalents. Equity Value (market cap) is the value attributable to equity shareholders only. Bridge from EV to equity value: subtract net debt (debt minus cash) and other non-equity claims. Use EV when comparing companies with different capital structures (EV/EBITDA, EV/EBIT, EV/Revenue) — these multiples are unaffected by leverage choices. Use equity value for per-share calculations (P/E, P/B) and when analyzing returns to shareholders specifically.",
+      "evaluation_criteria": "EV definition and components, equity value definition, bridge between the two, use case for EV multiples, use case for equity multiples, capital structure neutrality of EV"
+    },
+    {
+      "category": "technical",
+      "question": "How do you think about credit risk when evaluating a loan or a bond investment?",
+      "ideal_answer": "Credit risk has two components: probability of default (PD) and loss given default (LGD). PD assessment: analyze the borrower's ability to service debt (interest coverage ratio, DSCR, cash flow stability, leverage ratios) and willingness (management track record, governance, history). Qualitative factors: industry cyclicality, competitive position, customer concentration. LGD assessment: what collateral exists, how senior is the claim in the capital structure, recovery rates by asset class. Use the credit rating as a starting point but perform independent analysis — ratings are lagging. For bonds: also consider duration, yield spread vs comparable risk-free instruments, and liquidity. Stress test cash flows under downside scenarios.",
+      "evaluation_criteria": "PD vs LGD framework, quantitative coverage and leverage ratios, qualitative factors, capital structure seniority, rating limitations, stress testing"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you identified a financial risk that others had missed.",
+      "ideal_answer": "STAR: Describe the risk and why others missed it — often it is because the data was there but not triangulated across sources, or an assumption was baked in without being questioned. Explain your analysis process: what you were looking at, what seemed inconsistent, how you validated the hypothesis. Describe how you communicated the risk: to whom, in what format, with what urgency. Detail the response — was it acted on, and did the risk materialize or not? Reflect on what the experience taught you about independent thinking versus consensus views.",
+      "evaluation_criteria": "Root cause of others missing it, triangulation and assumption questioning, hypothesis validation, communication format and urgency, response and outcome, independent thinking lesson"
+    },
+    {
+      "category": "technical",
+      "question": "Explain how interest rate changes affect bond prices and how you manage duration risk.",
+      "ideal_answer": "Bond prices and yields move inversely: when interest rates rise, existing bond prices fall (their fixed coupons are now less attractive relative to new bonds). Duration measures price sensitivity to interest rate changes: a bond with duration of 5 means a 1% rise in rates causes approximately a 5% price decline. Modified duration gives the percentage price change per 1% yield change. Convexity adjusts the duration-based estimate for larger rate moves (bonds have convex price/yield curves). Managing duration risk: match asset duration to liability duration (ALM), use interest rate swaps to hedge duration without selling bonds, reduce portfolio duration when rates are expected to rise (shorten average maturity, shift from long to short bonds), use futures and options for tactical duration adjustment.",
+      "evaluation_criteria": "Price-yield inverse relationship, duration definition, modified duration, convexity, ALM approach, hedging tools (swaps, futures), tactical duration management"
+    },
+    {
+      "category": "technical",
+      "question": "How would you assess whether a company has sustainable competitive advantage before making an investment?",
+      "ideal_answer": "Framework: analyze economic moats across five sources. (1) Network effects: does the product get more valuable as more people use it? (2) Switching costs: how expensive or painful is it for customers to leave? (3) Cost advantages: does the company produce at structurally lower cost (scale, proprietary process, location)? (4) Intangible assets: patents, brands, regulatory licenses that competitors cannot easily replicate. (5) Efficient scale: does the company operate in a market so niche that a second entrant would be unprofitable? Evidence of moat: ROIC consistently above WACC over 10+ years (economic profit), stable or improving gross margins under pricing pressure, low customer churn, pricing power demonstrated in difficult markets. A wide moat is worth more if the addressable market is growing.",
+      "evaluation_criteria": "Five moat sources, ROIC vs WACC as evidence, margin stability, pricing power, churn data, addressable market interaction with moat value"
+    },
+    {
+      "category": "situational",
+      "question": "Your model shows an acquisition is accretive to EPS, but you have reservations about the deal. How do you handle this?",
+      "ideal_answer": "EPS accretion is a necessary but insufficient condition for a good deal. EPS can be artificially boosted by using cheap debt financing, by an acquirer with a high P/E multiple buying a lower P/E target, or by financial engineering rather than genuine value creation. Deeper tests: (1) Is the deal NPV-positive? Does the expected synergy value exceed the premium paid? (2) Is the strategic rationale sound — does this acquisition accelerate the acquirer's core value proposition? (3) What is the integration risk — can the acquirer actually capture the synergies? (4) What are the qualitative risks: culture clash, key person departure, customer concentration in the target? Present both the accretion analysis and your reservations with equal rigor to decision makers.",
+      "evaluation_criteria": "EPS as insufficient metric, artificial accretion sources, NPV and synergy test, strategic rationale, integration risk, qualitative risks, dual presentation to decision makers"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you had to explain a complex financial concept to a client or non-finance stakeholder.",
+      "ideal_answer": "STAR: Identify the concept and the audience. Explain how you assessed their starting knowledge before choosing your approach — asking a question is better than assuming. Describe your translation strategy: anchored to a concrete analogy or real-world equivalent, built up from first principles rather than starting with the technical term, used a specific numeric example rather than abstract formulas. Detail how you checked for understanding (asked questions, paused frequently) rather than monologuing. Share the outcome: did they make a better decision because they understood the concept? What would you refine in your approach?",
+      "evaluation_criteria": "Audience assessment first, analogy use, concrete example, interactive comprehension checking, decision quality improvement, refinement reflection"
+    },
+    {
+      "category": "technical",
+      "question": "What is the difference between accounting profit and economic profit, and why does it matter for investment decisions?",
+      "ideal_answer": "Accounting profit (net income) deducts explicit costs (interest on debt) but ignores the cost of equity capital — the return shareholders require for bearing risk. Economic profit (EVA: Economic Value Added) = NOPAT - (WACC * invested capital). A company can be accounting-profitable while destroying economic value if its ROIC is below its WACC. This matters for investment decisions: a company consistently generating economic profit (ROIC > WACC) is compounding intrinsic value; one consistently generating economic losses (ROIC < WACC) is destroying it even while reporting positive net income. The market eventually prices this in: high-ROIC businesses command premium multiples; low-ROIC businesses trade at discounts even when profitable.",
+      "evaluation_criteria": "Accounting vs economic profit distinction, EVA definition, ROIC vs WACC as value creation test, market pricing implications, investment screening use"
+    },
+    {
+      "category": "situational",
+      "question": "Markets are pricing in a significant recession. How do you reposition a client's portfolio?",
+      "ideal_answer": "First, clarify the client's objectives, time horizon, and risk tolerance — recession repositioning looks different for a 70-year-old retiree versus a 35-year-old accumulator. General principles for recession positioning: reduce cyclical exposure (consumer discretionary, industrials, financials) and increase defensive exposure (healthcare, utilities, consumer staples). On the fixed income side: increase duration if rate cuts are expected (recession typically prompts central bank easing), improve credit quality (reduce high-yield exposure, increase investment-grade and sovereign). Consider real assets as an inflation hedge if the recession is stagflationary. Maintain liquidity for opportunistic buying when sentiment reaches extremes. Do not time the market with binary all-in/all-out moves — use gradual rebalancing. Verify that the repositioning does not trigger unnecessary tax events.",
+      "evaluation_criteria": "Client objective clarification first, cyclical vs defensive rotation, fixed income duration and quality adjustment, stagflation consideration, liquidity for opportunistic buying, gradual rebalancing, tax awareness"
+    },
+    {
+      "category": "technical",
+      "question": "Explain how leverage affects returns and risk in a private equity investment.",
+      "ideal_answer": "Leverage amplifies both returns and losses. In a levered buyout, equity returns (IRR) depend on: operating performance (EBITDA growth), multiple expansion (exit multiple vs entry multiple), leverage (debt paydown reduces net debt, increasing equity value), and time (shorter hold = higher IRR for same cash-on-cash return). The leverage effect: if EV grows 50% and 70% of the purchase was debt-financed, the equity value more than doubles (debt is a fixed claim; equity captures all upside above debt). Risk amplification: the same leverage magnifies losses — if EV drops 30%, equity can be wiped out. Key metrics: EV/EBITDA entry and exit multiple, debt/EBITDA at entry (leverage), interest coverage ratio (can the business service debt through a downturn?), MOIC and IRR for returns. Covenant headroom is a practical concern — tight covenants under a downturn scenario trigger technical default risk.",
+      "evaluation_criteria": "Value creation drivers, leverage math for equity amplification, downside amplification, EV/EBITDA and debt/EBITDA metrics, MOIC and IRR, covenant risk"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you worked under significant deadline pressure to produce financial analysis. How did you maintain accuracy?",
+      "ideal_answer": "STAR: Describe the deliverable and the timeline. Explain how you structured the work under pressure: built the model skeleton first with explicit assumptions cells before populating numbers (a broken structure is harder to fix than wrong numbers), defined the key checks and balances (does the balance sheet balance, do cash flows tie to the income statement, does the output pass a sanity check against public comparables?) built them in from the start, not at the end. Describe what you cut versus what you protected — which analyses were essential to the decision and which were nice-to-have. Detail how you QA'd the final output: cross-checked with a colleague, confirmed sources, read the outputs before sending. Share the outcome.",
+      "evaluation_criteria": "Structure-first modeling, explicit assumption documentation, built-in checks, essential vs nice-to-have analysis discipline, cross-check process, source confirmation, outcome"
+    }
+  ]
+}

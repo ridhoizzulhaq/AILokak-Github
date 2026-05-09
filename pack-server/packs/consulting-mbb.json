@@ -1,0 +1,97 @@
+{
+  "id": "consulting-mbb",
+  "name": "Consulting — MBB",
+  "description": "Case framing, hypothesis-driven analysis, client management, and structured thinking.",
+  "category": "Situational",
+  "questions_count": 12,
+  "inputMode": "both",
+  "price_usdt": 0.0001,
+  "author": "Sofia Reyes",
+  "mentor": {
+    "name": "Sofia Reyes",
+    "role": "Engagement Manager · Top-3 Consulting Firm",
+    "avatar": "SR"
+  },
+  "industries": [
+    "consulting"
+  ],
+  "roles": [
+    "consultant",
+    "associate",
+    "engagement-manager"
+  ],
+  "questions": [
+    {
+      "category": "situational",
+      "question": "Your client CEO disagrees with your recommendation. How do you handle this?",
+      "ideal_answer": "First, listen completely to understand the nature of the disagreement — is it about the conclusion, the data, the assumptions, or the implementation? Distinguish between a disagreement based on information you lack (which should change your view) and a disagreement based on political preference (which should not). Revisit your analysis with the CEO's concern in mind. If the concern reveals a gap, acknowledge it and update. If your analysis holds up, re-present the key data point that drives the conclusion and ask directly what would change their view. Sometimes the CEO knows context you do not — ask for it explicitly. Never capitulate for the sake of harmony; it destroys your credibility as an advisor.",
+      "evaluation_criteria": "Listening first, distinguishing data vs political disagreement, hypothesis update when warranted, standing firm on data when not, explicit questioning, credibility preservation"
+    },
+    {
+      "category": "situational",
+      "question": "You are three weeks into an engagement and realize the initial hypothesis was wrong. What do you do?",
+      "ideal_answer": "Being willing to kill your hypothesis is a sign of rigor, not failure. First, validate the finding with a second data source or a colleague sanity check — is this actually wrong, or is the data pointing at a nuance you have not yet understood? If the hypothesis is genuinely wrong, communicate early to the project lead and client — the cost of correcting early is far lower than the cost of presenting a flawed recommendation. Present the new evidence, explain what it implies, and propose a revised hypothesis or analytical path. Document the original hypothesis and the pivot for the client — transparency builds trust.",
+      "evaluation_criteria": "Rigor over attachment, validation before declaring wrong, early communication, revised hypothesis proposal, transparency with client, trust through honesty"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to manage multiple workstreams simultaneously under significant time pressure.",
+      "ideal_answer": "STAR: Describe the engagement and the workstreams (ideally 3+ with interdependencies). Explain how you structured your time: daily priority-setting, clear ownership of each stream with explicit handoffs, frequent short check-ins to catch blockers early. Describe how you managed up (project lead informed of progress and risks) and across (coordinated with colleagues to avoid duplication and resolve dependencies). Detail how you handled a crisis in one stream without letting others fall behind. Share what was delivered and what you would do differently.",
+      "evaluation_criteria": "Structured time management, explicit ownership, upward communication, cross-team coordination, crisis handling without cascade, retrospective"
+    },
+    {
+      "category": "situational",
+      "question": "A key data source turns out to be unreliable mid-engagement. How do you proceed?",
+      "ideal_answer": "Immediately assess the impact: which parts of the analysis depend on this data source? Flag the issue to the project lead before attempting to solve it independently. Explore alternatives: proxy data sources, industry benchmarks, primary research (surveys, interviews). If no substitute exists, reframe the analysis around what is knowable and be explicit about the uncertainty — use scenario analysis or sensitivity analysis to show how the conclusion changes if assumptions are varied. Communicate transparently to the client about the data limitation and the steps taken to mitigate it. Never paper over bad data.",
+      "evaluation_criteria": "Impact assessment, upward escalation, alternative sourcing, scenario and sensitivity analysis, transparent client communication, data integrity"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you worked effectively with a client team that was initially resistant to outside help.",
+      "ideal_answer": "STAR: Describe the source of resistance — often fear of job loss, skepticism of outsiders, or prior bad experiences with consultants. Explain how you built trust: sought to understand their perspective without dismissing it, asked more questions than you gave answers early on, acknowledged their domain expertise explicitly, found ways to make them co-authors of the work rather than subjects of it. Describe a turning point where the dynamic shifted. Share the outcome — not just the deliverable, but the working relationship quality.",
+      "evaluation_criteria": "Understanding resistance sources, curiosity over assertion, acknowledging client expertise, co-creation approach, relationship turning point, relationship outcome"
+    },
+    {
+      "category": "situational",
+      "question": "You have 72 hours before the final client presentation and your slide deck is only 60% complete. What do you prioritize?",
+      "ideal_answer": "First, identify which slides carry the core argument — the problem statement, key findings, and recommendation. These must be complete and airtight. Slide completeness is not equal across all slides. Assess which supporting analyses are 'must-have' versus 'nice-to-have' given the recommendation and the audience. Delegate what can be delegated. Cut what is not essential to the argument. Ensure the narrative arc is clear before polishing individual slides. Spend the last four hours on end-to-end read-through for logical flow and anticipating executive questions, not adding new content. Never show up with a weak argument dressed in a pretty deck.",
+      "evaluation_criteria": "Argument-first prioritization, must-have vs nice-to-have discipline, delegation, narrative arc check, time allocation, argument quality over aesthetic completeness"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to synthesize a large amount of ambiguous information into a clear recommendation.",
+      "ideal_answer": "STAR: Describe the volume and ambiguity of the information (conflicting data sources, unclear scope, unknown stakeholder positions). Explain your synthesis process: start with the so-what rather than the what — what decision does this need to support? Group information by the question it answers. Identify the most important single insight buried in the complexity. Stress-test the recommendation against the strongest counterargument. Describe how you structured the output to be actionable and clear, not comprehensive. Share the decision it supported and whether the recommendation proved correct.",
+      "evaluation_criteria": "So-what first orientation, structured grouping, insight extraction, counterargument stress-testing, actionable output framing, outcome"
+    },
+    {
+      "category": "situational",
+      "question": "How do you structure an initial hypothesis when entering a new engagement with limited information?",
+      "ideal_answer": "Use issue tree or hypothesis tree structure: decompose the central question into the mutually exclusive, collectively exhaustive (MECE) set of possible explanations or solutions. For each branch, form a hypothesis about what the answer likely is based on industry knowledge, analogous situations, and first-principles reasoning. Prioritize the branches by expected impact and ease of validation — start with the hypotheses that are both most likely to be true and most important if true. Design your first two weeks of analysis to rapidly validate or invalidate the top hypotheses. Document and share the initial hypothesis tree with the team to build alignment and invite challenge.",
+      "evaluation_criteria": "Issue tree / MECE decomposition, hypothesis-first not data-first, prioritization by impact and testability, rapid validation design, team alignment"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a situation where you had to deliver an unpopular finding to a client.",
+      "ideal_answer": "STAR: Describe the finding — ideally one that contradicted the client's stated belief or a decision they had already made. Explain your preparation: verified the finding multiple times, anticipated the emotional reaction, prepared supporting evidence for every likely objection, pre-aligned with the engagement manager. Describe the delivery: led with the implication for the client, not with 'you were wrong,' presented evidence before conclusion, gave the client time to react and asked clarifying questions to understand their response. Share how the conversation resolved and what happened afterward — did they act on it?",
+      "evaluation_criteria": "Finding verification, anticipating reaction, pre-alignment, implication-first framing, evidence sequencing, reaction space, follow-through"
+    },
+    {
+      "category": "situational",
+      "question": "A junior analyst on your team is struggling and the deadline is in two days. What do you do?",
+      "ideal_answer": "First, understand why they are struggling: is it a skill gap, unclear direction, a personal issue, or an underestimated task? Spend 20 minutes with them to diagnose, not to take over. If it is a clarity problem, re-explain the objective and check their understanding. If it is a skill gap on a critical task, assess whether coaching them to completion in the available time is faster or slower than reassigning. If you reassign, do it without shame and explain the reasoning. Provide concrete, structured guidance rather than vague feedback. Check back more frequently for the remainder of the engagement. After the deadline, have a developmental conversation about what happened and how to prevent it.",
+      "evaluation_criteria": "Diagnosis first, clarity check, teach vs reassign judgment, shame-free reassignment, structured guidance, frequent check-ins, post-deadline developmental conversation"
+    },
+    {
+      "category": "behavioral",
+      "question": "How do you ensure the quality of your analysis when working under extreme time pressure?",
+      "ideal_answer": "Quality under pressure requires discipline at the start, not heroics at the end. Define 'good enough' for the purpose — what is the decision this analysis needs to support, and what level of confidence is required? Identify the two or three most critical checks: Does the model balance? Does the conclusion change significantly if a key assumption shifts by 20%? Is there an obvious alternative explanation you have not tested? Use a structured review checklist rather than open-ended review. Get a second pair of eyes on the logic, not just the numbers. Time-box your quality check — do not allow it to compress your thinking time.",
+      "evaluation_criteria": "Good-enough definition, critical check identification, sensitivity analysis, alternative explanation testing, structured review checklist, second opinion on logic"
+    },
+    {
+      "category": "situational",
+      "question": "How do you handle it when a client asks you a question in a presentation that you do not know the answer to?",
+      "ideal_answer": "Never fabricate. Say clearly that you do not have that answer with you, but that you will get it. Be specific about when you will follow up — 'I will send you the analysis by end of day tomorrow' is far more credible than 'soon.' Ask clarifying questions to understand exactly what they need: is it a data point, an analysis, or a judgment call? If you can answer partially, offer what you do know while being clear about the boundary of your knowledge. After the meeting, deliver the follow-up exactly when promised. One strong follow-up builds more trust than a dozen smooth presentations.",
+      "evaluation_criteria": "Honesty over bluffing, specific follow-up commitment, clarifying what is needed, offering partial answer transparently, precise delivery, trust building through follow-through"
+    }
+  ]
+}

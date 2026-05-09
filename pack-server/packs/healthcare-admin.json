@@ -1,0 +1,74 @@
+{
+  "id": "healthcare-admin",
+  "name": "Healthcare Administration",
+  "description": "Patient flow, regulatory compliance, clinical-administrative collaboration, and operational leadership.",
+  "category": "Leadership",
+  "questions_count": 8,
+  "inputMode": "both",
+  "price_usdt": 0.0001,
+  "author": "Dr. Aisha Kamara",
+  "mentor": {
+    "name": "Dr. Aisha Kamara",
+    "role": "Director of Operations · Major Teaching Hospital",
+    "avatar": "AK"
+  },
+  "industries": [
+    "healthcare"
+  ],
+  "roles": [
+    "administrator",
+    "operations-manager",
+    "director-of-nursing",
+    "department-head"
+  ],
+  "questions": [
+    {
+      "category": "situational",
+      "question": "How would you handle a situation where budget cuts threaten patient care quality?",
+      "ideal_answer": "Patient outcomes are non-negotiable — establish that position clearly before any budget conversation. First, conduct an impact analysis: which proposed cuts directly affect clinical care pathways and which affect administrative overhead? Quantify the patient safety risk of each clinical cut in terms the CFO and board understand (readmission rates, complication rates, regulatory risk, liability). Identify alternative cost reductions: administrative streamlining, supply chain renegotiation, vendor consolidation, efficiency improvements in scheduling and capacity utilization. Present a prioritized alternative package that meets the budget target without compromising care. If cuts that harm patients are forced, document your objection formally.",
+      "evaluation_criteria": "Patient-first non-negotiable position, clinical vs administrative impact distinction, patient safety quantification, alternative sourcing, formal objection documentation"
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you improved patient flow or operational efficiency in a clinical environment.",
+      "ideal_answer": "STAR: Describe the baseline inefficiency — quantify it (average wait time, throughput per hour, bed turnover time, overtime cost). Explain how you diagnosed the root cause: process observation, staff interviews, data analysis of the flow. Describe the intervention: process redesign, staffing model change, technology implementation, or layout change. Quantify the improvement against the baseline. Address how you managed the change: staff resistance, training, pilot before full rollout. Share what you would do differently.",
+      "evaluation_criteria": "Baseline quantification, root cause diagnosis, intervention description, improvement quantification, change management, retrospective"
+    },
+    {
+      "category": "situational",
+      "question": "A physician is consistently not following new clinical protocols. How do you address this?",
+      "ideal_answer": "Do not frame it as a compliance issue first — understand the reason. Schedule a private conversation to understand their perspective: do they disagree with the clinical evidence behind the protocol, is there a patient-specific reason they are deviating, or is it habit and awareness? If it is a legitimate clinical concern, take it seriously and bring it to the clinical committee. If it is awareness or habit, provide education and clear documentation of the protocol and the reason it matters. If non-compliance continues after understanding and education, involve peer review and medical staff leadership. Document every step. Patient safety creates a non-negotiable floor for escalation.",
+      "evaluation_criteria": "Reason-first approach, private conversation, legitimate concern pathway, education before enforcement, peer review escalation, documentation, patient safety floor"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you had to build collaboration between clinical and administrative staff who had conflicting priorities.",
+      "ideal_answer": "STAR: Describe the specific conflict — often clinical staff prioritize care quality and time, administrative staff prioritize throughput and cost. Explain how you brought both groups to a shared problem definition: identified the patient outcome they both cared about and showed how the conflict was harming it. Facilitated a structured working session focused on shared goals rather than departmental positions. Created a small cross-functional pilot team with both clinical and administrative representation to design and test a solution. Described the outcome and how you sustained the collaboration.",
+      "evaluation_criteria": "Shared problem definition, patient outcome as unifying goal, structured facilitation, cross-functional pilot team, sustained collaboration"
+    },
+    {
+      "category": "situational",
+      "question": "How would you respond to a Joint Commission or regulatory inspection finding a compliance gap?",
+      "ideal_answer": "Stay calm and do not be defensive — treat inspectors as partners in patient safety, not adversaries. Acknowledge the finding immediately and honestly. Do not guess at root causes under pressure; commit to a thorough investigation. Within 24 hours: brief senior leadership, convene the relevant operational leads, conduct a root cause analysis (RCA) using structured methods like fishbone or 5-whys. Develop a corrective action plan (CAP) with specific owners and deadlines. Follow up with the regulator proactively with written documentation of the CAP. Verify that the corrective action is sustained over time — many citations recur because organizations fix the symptom, not the system.",
+      "evaluation_criteria": "Non-defensive posture, honest acknowledgment, rapid leadership briefing, structured RCA, documented CAP with owners, proactive regulator follow-up, systemic fix emphasis"
+    },
+    {
+      "category": "leadership",
+      "question": "Tell me about a time you led a significant change initiative in a healthcare setting.",
+      "ideal_answer": "STAR: Describe the change (EHR implementation, care model redesign, service line restructuring). Explain the clinical and operational drivers for the change. Describe your stakeholder engagement strategy: clinical champions, department heads, frontline staff — who needed to be co-designers versus informed. Detail the implementation approach: phased rollout with learning loops, training infrastructure, command center for issue escalation. Address resistance: where it came from, how you engaged it. Quantify outcomes: patient outcomes, operational metrics, staff adoption. Reflect on what you would do differently.",
+      "evaluation_criteria": "Clinical and operational driver clarity, stakeholder engagement differentiation, co-design vs inform spectrum, phased implementation, resistance engagement, outcome quantification"
+    },
+    {
+      "category": "situational",
+      "question": "How do you balance the need for standardized protocols with the reality that every patient is different?",
+      "ideal_answer": "Protocols exist to protect patients from unnecessary variation that creates harm — not to remove clinical judgment. The goal is standardization of the process, not standardization of the outcome. Well-designed protocols build in decision points for clinical discretion: standard treatment pathway with explicit criteria for deviation, and a documentation requirement when deviation occurs. When a clinician deviates, it is an opportunity to learn: was the protocol wrong (update it), was the patient an outlier (document), or was the deviation unjustified (address)? Build a culture where protocol adherence and clinical excellence are complementary, not competing.",
+      "evaluation_criteria": "Purpose of standardization, decision points for discretion, deviation documentation, learning from deviation, protocol-as-floor not ceiling framing"
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you used data to make a significant operational or clinical decision.",
+      "ideal_answer": "STAR: Describe the decision and the data you used. Explain how you gathered the data (existing systems, new measurement, external benchmarks), how you validated its quality and completeness, and how you analyzed it to surface the insight. Detail how you translated the data into a recommendation: what it said and what it did not say (honest about limits). Describe the decision made and the outcome. If the data was imperfect, explain how you accounted for uncertainty in your recommendation.",
+      "evaluation_criteria": "Data quality validation, insight surfacing, honest limits acknowledgment, uncertainty accounting, recommendation quality, outcome"
+    }
+  ]
+}

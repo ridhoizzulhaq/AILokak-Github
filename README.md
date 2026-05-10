@@ -11,7 +11,15 @@ AILokak is a local AI coach interview platform powered by Tether qvac that elimi
 
 ##### Flow: questions → speech-to-text (or typing) → AI evaluation → session summary.
 
+
 ![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@28e88232e250f9338a0b443ff89b200b3218a9f5/uploads/2026-05-09T19-56-48-774Z-scipa80hr.png)
+---
+
+## Links
+
+- **[Demo Video](https://www.youtube.com/watch?v=hsytkjRcgJY)**
+- **[Slide Deck](https://drive.google.com/file/d/1z0B2I-xo9ribkX_ikosGVcRleVemU28o/view?usp=sharing)**
+
 ---
 
 ## QVAC Capabilities Used

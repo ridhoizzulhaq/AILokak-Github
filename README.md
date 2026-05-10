@@ -84,6 +84,9 @@ Knowledge base includes: STAR method examples, role-specific competencies, commo
 
 ### Marketplace Packs
 ![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@369decb404e92b023e727d9bfc2093b97c7dfbd8/uploads/2026-05-09T20-01-09-561Z-p16t6axfa.png)
+
+-
+
 AILokak's marketplace offers question packs tailored to specific careers, each with field-specific questions and evaluation criteria. Browse by industry, let the AI recommend based on your target job, and pay once with USDT0. Behind the scenes, purchased packs are embedded into a local RAG knowledge base via `@qvac/sdk` , so your interviewer knows what a great answer looks like in your field
 
 Each pack: role-specific questions, voice + text input, AI evaluation adapted to role context.
@@ -111,9 +114,10 @@ Packs are gated by **x402**, a micropayment protocol built on Plasma Mainnet bec
 File written with `mode: 0o600` — readable only by the OS user running the app. Not tracked by git (lives outside the project directory in Electron `userData`).
 
 **What happens on purchase:**
+-
 ![enter image description here](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@da47d75ebffc0c2efd487ce9b309eb6ec0f29107/uploads/2026-05-09T19-59-33-582Z-mapmo6cho.png)
 
-
+-
 Pack server receives **only**: wallet address + payment proof. It has no access to your answers, voice data, or AI session.
 
 ---

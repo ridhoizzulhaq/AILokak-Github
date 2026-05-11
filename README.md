@@ -31,7 +31,7 @@ Session summary
 ## Links
 
 * [Demo Video](https://youtube.com/watch?v=g4TzYx3tNbo)
-* [Slide Deck](drive.google.com/file/d/1ao8VlCJgYcHs3WBUQUyyEOtmFG7x0UwV/view?usp=drive_link)
+* [Slide Deck](https://drive.google.com/file/d/1ao8VlCJgYcHs3WBUQUyyEOtmFG7x0UwV/view?usp=drive_link)
 
 ---
 

@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node --watch index.js",
-    "postinstall": "node -e \"const fs=require('fs'); ['node_modules/@t402/evm/dist/esm/chunk-FJPMVWD7.mjs','node_modules/@t402/evm/dist/cjs/exact/server/index.js'].forEach(f=>{ if(fs.existsSync(f)){ let c=fs.readFileSync(f,'utf8'); const patched=c.replace(/(\\/{2} Plasma Mainnet[\\s\\S]*?\\\"eip155:9745\\\"[\\s\\S]*?name: )\\\"TetherToken\\\"/,'$1\\\"USDT0\\\"'); fs.writeFileSync(f,patched); } })\""
+    "dev": "node --watch index.js"
   },
   "dependencies": {
     "@t402/core": "^2.0.0",

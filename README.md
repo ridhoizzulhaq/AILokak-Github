@@ -17,7 +17,7 @@ AILokak is a local AI coach interview platform powered by Tether qvac that elimi
 
 ## Links
 
-- **[Demo Video](https://www.youtube.com/watch?v=hsytkjRcgJY)**
+- **[Demo Video](youtube.com/watch?v=baJBrZpt0q4)**
 - **[Slide Deck](https://drive.google.com/file/d/1z0B2I-xo9ribkX_ikosGVcRleVemU28o/view?usp=sharing)**
 
 ---

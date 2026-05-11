@@ -4,6 +4,8 @@
 
 Built for the **Tether Frontier Hackathon Track**.
 
+**[▶ Watch Demo](https://youtube.com/watch?v=g4TzYx3tNbo)** · **[📄 Slide Deck](https://drive.google.com/file/d/1ao8VlCJgYcHs3WBUQUyyEOtmFG7x0UwV/view?usp=drive_link)**
+
 ---
 
 ## Download

@@ -30,8 +30,8 @@ Session summary
 
 ## Links
 
-* [Demo Video](https://www.youtube.com/watch?v=baJBrZpt0q4)
-* [Slide Deck](https://drive.google.com/file/d/1ao8VlCJgYcHs3WBUQUyyEOtmFG7x0UwV/view?usp=drive_link)
+* [Demo Video](https://youtube.com/watch?v=g4TzYx3tNbo)
+* [Slide Deck](drive.google.com/file/d/1ao8VlCJgYcHs3WBUQUyyEOtmFG7x0UwV/view?usp=drive_link)
 
 ---
 

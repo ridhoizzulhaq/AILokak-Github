@@ -252,7 +252,9 @@ Each pack includes:
 
 ## How Pack Purchase Works: x402 + Tether WDK
 
-Packs are gated using **x402**, a micropayment protocol built on Plasma Mainnet with near zero-fee USDT0 transactions.
+Packs are gated using **x402**, a micropayment protocol built on **Plasma Mainnet** with near zero-fee USDT0 transactions ([docs](https://docs.wdk.tether.io/ai/x402)).
+
+We use Plasma Mainnet as it is currently the chain supported by the Tether WDK x402 protocol. We look forward to Tether x402 development expanding to the **Solana ecosystem**.
 
 No external account or subscription is required — only a one-time on-chain payment.
 
@@ -355,6 +357,20 @@ Each `.json` file inside `pack-server/packs/`:
 
 ## Setup
 
+### Option A — Download DMG (macOS arm64)
+
+[![Download DMG](https://img.shields.io/badge/Download-ailokak--1.0.0--beta.dmg-black?style=for-the-badge&logo=apple)](https://github.com/ridhoizzulhaq/AILokak-Github/releases/tag/1.0.0)
+
+1. Open `ailokak-1.0.0-beta.dmg`
+2. Drag **AILokak** to Applications
+3. First launch: QVAC models download automatically (~2–3 GB)
+
+> macOS may block the app — right-click → Open to bypass Gatekeeper.
+
+---
+
+### Option B — Run from Source
+
 ### 1. Clone and Install
 
 ```bash
@@ -454,7 +470,6 @@ resources/
 
 ---
 
-<<<<<<< HEAD
 ## Development
 
 ```bash
@@ -471,6 +486,3 @@ npm run dev
 * **Piper TTS** — offline neural text-to-speech
 * **x402 / t402** — micropayment-gated marketplace packs
 * **Tether WDK** — non-custodial wallet (auto-generated per user)
-=======
-
->>>>>>> 80924989faeccc5db8e66f734b0cb31ac343b725

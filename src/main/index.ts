@@ -150,53 +150,7 @@ function stopPiper(): void {
   if (piperProc) { piperProc.kill('SIGTERM'); piperProc = null; piperReady = false }
 }
 
-function int16ArrayToBuffer(samples: Int16Array): Buffer {
-  const buf = Buffer.alloc(samples.length * 2)
-  for (let i = 0; i < samples.length; i++) {
-    buf.writeInt16LE(Math.max(-32768, Math.min(32767, Math.round(samples[i] ?? 0))), i * 2)
-  }
-  return buf
-}
 
-function createWavHeader(dataLength: number, sampleRate: number): Buffer {
-  const header = Buffer.alloc(44)
-  header.write('RIFF', 0)
-  header.writeUInt32LE(36 + dataLength, 4)
-  header.write('WAVE', 8)
-  header.write('fmt ', 12)
-  header.writeUInt32LE(16, 16)
-  header.writeUInt16LE(1, 20)       // PCM
-  header.writeUInt16LE(1, 22)       // mono
-  header.writeUInt32LE(sampleRate, 24)
-  header.writeUInt32LE(sampleRate * 2, 28)
-  header.writeUInt16LE(2, 32)
-  header.writeUInt16LE(16, 34)
-  header.write('data', 36)
-  header.writeUInt32LE(dataLength, 40)
-  return header
-}
-
-async function speakViaSDK(text: string): Promise<boolean> {
-  if (!state.ttsId) return false
-  try {
-    const { textToSpeech } = await getSDK()
-    const result = textToSpeech({ modelId: state.ttsId, text, inputType: 'text', stream: false })
-    const audioBuffer = new Int16Array((await result.buffer as unknown as ArrayLike<number>))
-    if (!audioBuffer || audioBuffer.length === 0) return false
-
-    const audioData = int16ArrayToBuffer(audioBuffer)
-    const wavBuf = Buffer.concat([createWavHeader(audioData.length, 44100), audioData])
-    const tmpFile = join(tmpdir(), `tts_${Date.now()}.wav`)
-    writeFileSync(tmpFile, wavBuf)
-    spawnSync('afplay', [tmpFile], { stdio: 'ignore' })
-    unlinkSync(tmpFile)
-    console.log(`[TTS SDK] spoke ${audioBuffer.length} samples`)
-    return true
-  } catch (err) {
-    console.error('[TTS SDK] error:', err)
-    return false
-  }
-}
 
 async function speakViaPiper(text: string): Promise<void> {
   if (!piperProc || !piperReady) {
@@ -491,7 +445,7 @@ function setupIpcHandlers(): void {
       const sdkAll = await getSDK()
       const llmSrc = (sdkAll as Record<string, unknown>)[appConfig.llmModelKey] ?? QWEN3_1_7B_INST_Q4
       state.llmId = await loadModel({
-        modelSrc: llmSrc as Parameters<typeof loadModel>[0]['modelSrc'],
+        modelSrc: llmSrc as any,
         modelType: 'llm',
         modelConfig: { ctx_size: 4096, device: 'gpu' },
         onProgress: (p) => send(`LLM: ${p.percentage.toFixed(0)}%`, 25 + p.percentage * 0.35)
@@ -1012,7 +966,7 @@ Analyze the resume text and extract key information. Return ONLY valid JSON in t
 
       send('Downloading model…', 5)
       state.llmId = await sdkMod.loadModel({
-        modelSrc: modelSrc as Parameters<typeof sdkMod.loadModel>[0]['modelSrc'],
+        modelSrc: modelSrc as any,
         modelType: 'llm',
         modelConfig: { ctx_size: 4096, device: 'gpu' },
         onProgress: (p) => send(`Downloading: ${p.percentage.toFixed(0)}%`, 5 + p.percentage * 0.93)

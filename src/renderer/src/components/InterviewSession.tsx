@@ -88,14 +88,6 @@ function ScoreBar({ score }: { score: number }) {
   )
 }
 
-function splitSentences(text: string): string[] {
-  const clean = text.replace(/\*{1,2}none\*{1,2}/gi, '').replace(/^none\.?$/im, '').trim()
-  if (!clean) return []
-  return clean
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 2)
-}
 
 interface GrammarPair { wrong: string; correct: string }
 

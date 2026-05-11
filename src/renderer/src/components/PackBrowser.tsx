@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 interface PackBrowserProps {
   selectedPackIds: string[]
@@ -260,14 +260,10 @@ export function PackBrowser({ selectedPackIds, onPackChange }: PackBrowserProps)
   const [buyingPackId, setBuyingPackId] = useState<string | null>(null)
   const [buyPhase, setBuyPhase] = useState<BuyPhase>('connecting')
   const [buyError, setBuyError] = useState<string | null>(null)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searching, setSearching] = useState(false)
-  const [highlightedIds, setHighlightedIds] = useState<string[] | null>(null)
-  const [searchError, setSearchError] = useState<string | null>(null)
+  const [highlightedIds] = useState<string[] | null>(null)
   const [txToast, setTxToast] = useState<{ packName: string; txHash: string } | null>(null)
   const [catalogStatus, setCatalogStatus] = useState<CatalogStatus>('idle')
   const [catalogUpdated, setCatalogUpdated] = useState(0)
-  const searchRef = useRef<HTMLInputElement>(null)
 
   // Restore purchased packs from localStorage on mount + fetch remote catalog
   useEffect(() => {
@@ -377,33 +373,6 @@ export function PackBrowser({ selectedPackIds, onPackChange }: PackBrowserProps)
     }
   }
 
-  const handleSearch = async () => {
-    const query = searchQuery.trim()
-    if (!query) {
-      setHighlightedIds(null)
-      setSearchError(null)
-      return
-    }
-    setSearching(true)
-    setSearchError(null)
-    setHighlightedIds(null)
-    try {
-      const status = await window.qvacAPI.getModelsStatus()
-      if (!status.llm) {
-        setSearchError('LLM not loaded yet — wait for models to finish loading.')
-        return
-      }
-      const notInstalled = packs.filter((p) => !p.installed)
-      const ids = await window.qvacAPI.searchPacksAI(query, notInstalled)
-      setHighlightedIds(ids.length > 0 ? ids : [])
-    } catch (err) {
-      console.error('[search] error:', err)
-      setSearchError(`Search failed: ${err instanceof Error ? err.message : String(err)}`)
-    } finally {
-      setSearching(false)
-    }
-  }
-
   const handleRemovePack = (packId: string) => {
     setPacks((prev) => prev.map((p) => (p.id === packId ? { ...p, installed: false } : p)))
     const purchased = JSON.parse(localStorage.getItem('purchasedPacks') || '[]') as string[]
@@ -470,7 +439,7 @@ export function PackBrowser({ selectedPackIds, onPackChange }: PackBrowserProps)
               background: catalogStatus === 'error' ? 'var(--pale-red-bg)' : 'var(--pale-blue-bg)',
               border: `1px solid ${catalogStatus === 'error' ? 'var(--pale-red-fg)' : 'var(--pale-blue-fg)'}`,
               borderRadius: 'var(--radius-md)',
-              opacity: catalogStatus === 'idle' ? 0 : 1,
+              opacity: 1,
               transition: 'opacity 300ms ease',
             }}
           >

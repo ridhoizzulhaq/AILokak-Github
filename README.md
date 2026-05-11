@@ -37,7 +37,7 @@ AI evaluation
 Session summary
 ```
 
-![Architecture](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@28e88232e250f9338a0b443ff89b200b3218a9f5/uploads/2026-05-09T19-56-48-774Z-scipa80hr.png)
+![Architecture](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@d5a90ff8456a3bc0a64b58881c263f248c87994f/uploads/2026-05-11T19-54-41-315Z-yu61m587v.png)
 
 ---
 ## Why AILokak?

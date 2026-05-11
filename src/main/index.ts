@@ -3,7 +3,6 @@ import { join } from 'path'
 import { spawn, spawnSync, ChildProcess } from 'child_process'
 import { writeFileSync, unlinkSync, mkdirSync, existsSync, readdirSync, readFileSync } from 'fs'
 import { tmpdir } from 'os'
-import { request as httpRequest } from 'http'
 
 // Suppress EPIPE errors from SDK logger writing to closed stdout/stderr
 process.stdout.on('error', (err: NodeJS.ErrnoException) => { if (err.code !== 'EPIPE') throw err })
@@ -26,6 +25,38 @@ const optimizer = {
 
 import { ragDocuments } from './interview-data'
 import { initWallet, getWalletInfo, getBalance, purchasePack } from './wallet'
+
+// ── App config ───────────────────────────────────────────────────────────────
+interface AppConfig {
+  packServerUrl: string
+  llmModelKey: string
+}
+
+const DEFAULT_CONFIG: AppConfig = {
+  packServerUrl: 'http://13.221.44.63:4021',
+  llmModelKey: 'QWEN3_1_7B_INST_Q4',
+}
+
+let appConfig: AppConfig = { ...DEFAULT_CONFIG }
+
+function getConfigPath(): string {
+  return join(app.getPath('userData'), 'ailokak-config.json')
+}
+
+function loadConfig(): void {
+  try {
+    const raw = readFileSync(getConfigPath(), 'utf-8')
+    const parsed = JSON.parse(raw) as Partial<AppConfig>
+    appConfig = { ...DEFAULT_CONFIG, ...parsed }
+  } catch {
+    appConfig = { ...DEFAULT_CONFIG }
+  }
+}
+
+function saveConfig(): void {
+  writeFileSync(getConfigPath(), JSON.stringify(appConfig, null, 2), 'utf-8')
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function getPacksDir(): string {
   return join(app.getPath('userData'), 'packs')
@@ -50,6 +81,7 @@ interface ModelState {
   whisperId: string | null
   ttsId: string | null
   embeddingsId: string | null
+  ocrId: string | null
   ragReady: boolean
 }
 
@@ -58,6 +90,7 @@ const state: ModelState = {
   whisperId: null,
   ttsId: null,
   embeddingsId: null,
+  ocrId: null,
   ragReady: false
 }
 
@@ -325,6 +358,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
+  loadConfig()
   electronApp.setAppUserModelId('com.interviewai')
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -360,6 +394,7 @@ async function unloadAll(): Promise<void> {
   if (state.whisperId) { await unloadModel({ modelId: state.whisperId, clearStorage: false }); state.whisperId = null }
   if (state.ttsId) { await unloadModel({ modelId: state.ttsId, clearStorage: false }); state.ttsId = null }
   if (state.embeddingsId) { await unloadModel({ modelId: state.embeddingsId, clearStorage: false }); state.embeddingsId = null }
+  if (state.ocrId) { await unloadModel({ modelId: state.ocrId, clearStorage: false }); state.ocrId = null }
 }
 
 async function setupRag(): Promise<void> {
@@ -423,7 +458,8 @@ function setupIpcHandlers(): void {
     llm: !!state.llmId,
     whisper: !!state.whisperId,
     tts: !!state.ttsId,
-    rag: state.ragReady
+    rag: state.ragReady,
+    ocr: !!state.ocrId
   }))
 
   ipcMain.handle('load-all-models', async (event) => {
@@ -437,6 +473,7 @@ function setupIpcHandlers(): void {
         QWEN3_1_7B_INST_Q4,
         WHISPER_TINY,
         VAD_SILERO_5_1_2,
+        OCR_LATIN_RECOGNIZER_1,
       } = await getSDK()
 
       send('Downloading embeddings model...', 0)
@@ -451,8 +488,10 @@ function setupIpcHandlers(): void {
       send('Knowledge base ready.', 25)
 
       send('Downloading LLM model...', 25)
+      const sdkAll = await getSDK()
+      const llmSrc = (sdkAll as Record<string, unknown>)[appConfig.llmModelKey] ?? QWEN3_1_7B_INST_Q4
       state.llmId = await loadModel({
-        modelSrc: QWEN3_1_7B_INST_Q4,
+        modelSrc: llmSrc as Parameters<typeof loadModel>[0]['modelSrc'],
         modelType: 'llm',
         modelConfig: { ctx_size: 4096, device: 'gpu' },
         onProgress: (p) => send(`LLM: ${p.percentage.toFixed(0)}%`, 25 + p.percentage * 0.35)
@@ -486,6 +525,27 @@ function setupIpcHandlers(): void {
       send('Speech recognition ready.', 80)
 
       // TTS handled by Piper (no SDK TTS model needed)
+
+      // OCR model — optional, failure does not abort app
+      send('Downloading OCR model...', 82)
+      try {
+        state.ocrId = await loadModel({
+          modelSrc: OCR_LATIN_RECOGNIZER_1,
+          modelType: 'ocr',
+          modelConfig: {
+            langList: ['en'],
+            useGPU: true,
+            timeout: 30000,
+            lowConfidenceThreshold: 0.5,
+            recognizerBatchSize: 1,
+          },
+          onProgress: (p) => send(`OCR: ${p.percentage.toFixed(0)}%`, 82 + p.percentage * 0.16)
+        })
+        send('OCR ready.', 98)
+      } catch (ocrErr) {
+        console.warn('[OCR] model load failed (optional):', ocrErr)
+      }
+
       send('All models ready!', 100)
       return { success: true }
     } catch (err) {
@@ -525,12 +585,13 @@ function setupIpcHandlers(): void {
     'generate-question',
     async (
       event,
-      { category, jobDescription, questionNumber, history, selectedPackIds }: {
+      { category, jobDescription, questionNumber, history, selectedPackIds, resumeContext }: {
         category: string
         jobDescription?: string
         questionNumber: number
         history: Array<{ role: string; content: string }>
         selectedPackIds?: string[]
+        resumeContext?: string
       }
     ) => {
       if (!state.llmId) return { error: 'LLM not loaded' }
@@ -542,6 +603,7 @@ You are a professional job interviewer conducting a practice interview session.
 Generate interview question number ${questionNumber}.
 Category: ${category}.
 ${jobDescription ? `Job Description context: ${jobDescription}` : ''}
+${resumeContext ? `Candidate resume summary: ${resumeContext}\nTailor the question to probe the candidate's specific experience and skills mentioned in their resume.` : ''}
 ${ragContext ? `Reference interview questions for inspiration (do not repeat these exactly):\n${ragContext}` : ''}
 Be professional but conversational. Ask a specific, thoughtful question.
 Output the question text ONLY. Do NOT write "Here's", "Question:", numbers, or any prefix. Start directly with the question word (What, Tell, Describe, How, Can, etc.).`
@@ -554,7 +616,7 @@ Output the question text ONLY. Do NOT write "Here's", "Question:", numbers, or a
 
       let fullText = ''
       try {
-        const result = completion({ modelId: state.llmId, history: messages, stream: true })
+        const result = completion({ modelId: state.llmId, history: messages, stream: true, kvCache: true })
         for await (const token of result.tokenStream) {
           fullText += token
           event.sender.send('completion-token', { token })
@@ -596,7 +658,14 @@ You must respond in this EXACT format with these section headers:
 SCORE: [number 1-10]
 STRENGTHS: [what they did well, 1-2 sentences. If none, write "None"]
 IMPROVEMENTS: [specific suggestions, 1-2 sentences. If none, write "None"]
-GRAMMAR: [Check for grammar, word choice, tense, article, preposition errors. Write ONLY in this exact format, one per line: wrong phrase -> correct phrase. Example: I has experience -> I have experience. If no errors, write only: Clean]
+GRAMMAR: [Find grammar errors: wrong verb form, wrong tense, missing/wrong article, wrong preposition, subject-verb disagreement. Write each error as one line in this EXACT format with no extra text, no bullets, no numbers, no intro sentence:
+wrong phrase -> correct phrase
+wrong phrase -> correct phrase
+Examples:
+I has five years -> I have five years
+She work at Google -> She works at Google
+I am work here since 2020 -> I have been working here since 2020
+If no grammar errors found, write only the single word: Clean]
 EXAMPLE: [a stronger version of their answer, 2-3 sentences]
 
 Evaluate based on:
@@ -617,7 +686,7 @@ Answer: "${answer}"`
 
       let fullText = ''
       try {
-        const result = completion({ modelId: state.llmId, history: messages, stream: true })
+        const result = completion({ modelId: state.llmId, history: messages, stream: true, kvCache: true })
         for await (const token of result.tokenStream) {
           fullText += token
           event.sender.send('completion-token', { token })
@@ -666,7 +735,7 @@ TIPS: [3 actionable tips for next session, bullet points]`
 
       let fullText = ''
       try {
-        const result = completion({ modelId: state.llmId, history: messages, stream: true })
+        const result = completion({ modelId: state.llmId, history: messages, stream: true, kvCache: true })
         for await (const token of result.tokenStream) {
           fullText += token
           event.sender.send('completion-token', { token })
@@ -766,7 +835,7 @@ Example — user says "i want to work in medical industry":
         }
       ]
 
-      const result = completion({ modelId: state.llmId, history: messages, stream: true })
+      const result = completion({ modelId: state.llmId, history: messages, stream: true, kvCache: true })
       let responseText = ''
       for await (const token of result.tokenStream) {
         responseText += token
@@ -815,6 +884,53 @@ Example — user says "i want to work in medical industry":
     }
   })
 
+  // OCR: extract text from resume image
+  ipcMain.handle('ocr-extract', async (_event, imageBuffer: Buffer) => {
+    if (!state.ocrId) return { success: false, error: 'OCR model not loaded' }
+    try {
+      const { ocr } = await getSDK()
+      const buf = Buffer.isBuffer(imageBuffer) ? imageBuffer : Buffer.from(imageBuffer)
+      const { blocks } = ocr({ modelId: state.ocrId, image: buf })
+      const result = await blocks
+      const text = result.map((b) => b.text).join('\n').trim()
+      return { success: true, text }
+    } catch (err) {
+      return { success: false, error: String(err) }
+    }
+  })
+
+  // LLM: analyze extracted resume text into structured profile
+  ipcMain.handle('analyze-resume', async (_event, resumeText: string) => {
+    if (!state.llmId) return { success: false, error: 'LLM not loaded' }
+    try {
+      const { completion } = await getSDK()
+      const messages = [
+        {
+          role: 'system',
+          content: `/no_think
+Analyze the resume text and extract key information. Return ONLY valid JSON in this exact shape, no markdown, no explanation:
+{"title":"","experience_years":0,"skills":[],"industries":[],"achievements":[],"summary":""}`
+        },
+        { role: 'user', content: resumeText }
+      ]
+      const result = completion({ modelId: state.llmId, history: messages, stream: true, kvCache: true })
+      let responseText = ''
+      for await (const token of result.tokenStream) {
+        responseText += token
+      }
+      const cleaned = stripThinkTags(responseText).replace(/```json|```/g, '').trim()
+      const arrayMatch = cleaned.match(/\{[\s\S]*\}/)
+      if (arrayMatch) {
+        try {
+          return { success: true, profile: JSON.parse(arrayMatch[0]) }
+        } catch { /* fall through */ }
+      }
+      return { success: true, profile: { summary: cleaned } }
+    } catch (err) {
+      return { success: false, error: String(err) }
+    }
+  })
+
   // ── Wallet & x402 payment ────────────────────────────────────────────────
 
   ipcMain.handle('init-wallet', async () => {
@@ -843,7 +959,7 @@ Example — user says "i want to work in medical industry":
 
   ipcMain.handle('purchase-pack', async (_event, packId: string) => {
     try {
-      const result = await purchasePack(packId)
+      const result = await purchasePack(packId, appConfig.packServerUrl)
       if (result.success && result.questions && result.questions.length > 0) {
         savePackToDisk(packId, result.questions)
       }
@@ -857,20 +973,58 @@ Example — user says "i want to work in medical industry":
     clipboard.writeText(text)
   })
 
-  ipcMain.handle('fetch-pack-catalog', () => {
-    return new Promise((resolve) => {
-      const req = httpRequest({ host: '13.221.44.63', port: 4021, path: '/catalog', timeout: 4000 }, (res) => {
-        let data = ''
-        res.on('data', (chunk: Buffer) => { data += chunk.toString() })
-        res.on('end', () => {
-          try { resolve({ ok: true, data: JSON.parse(data) }) }
-          catch { resolve({ ok: false, error: 'Invalid JSON from catalog' }) }
-        })
+  ipcMain.handle('fetch-pack-catalog', async () => {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 5000)
+    try {
+      const res = await fetch(`${appConfig.packServerUrl}/catalog`, { signal: controller.signal })
+      clearTimeout(timer)
+      if (!res.ok) return { ok: false, error: `HTTP ${res.status}` }
+      return { ok: true, data: await res.json() }
+    } catch (err: unknown) {
+      clearTimeout(timer)
+      return { ok: false, error: err instanceof Error ? err.message : String(err) }
+    }
+  })
+
+  // ── Configuration ────────────────────────────────────────────────────────────
+  ipcMain.handle('get-config', () => ({ ...appConfig }))
+
+  ipcMain.handle('set-config', (_event, patch: Partial<AppConfig>) => {
+    appConfig = { ...appConfig, ...patch }
+    saveConfig()
+    return { success: true }
+  })
+
+  ipcMain.handle('switch-llm-model', async (event, modelKey: string) => {
+    const send = (msg: string, pct: number): void =>
+      event.sender.send('model-progress', { message: msg, percentage: pct })
+    try {
+      const sdkMod = await getSDK()
+      const modelSrc = (sdkMod as Record<string, unknown>)[modelKey]
+      if (!modelSrc) return { success: false, error: `Unknown model: ${modelKey}` }
+
+      if (state.llmId) {
+        send('Unloading current model…', 0)
+        await sdkMod.unloadModel({ modelId: state.llmId, clearStorage: false })
+        state.llmId = null
+      }
+
+      send('Downloading model…', 5)
+      state.llmId = await sdkMod.loadModel({
+        modelSrc: modelSrc as Parameters<typeof sdkMod.loadModel>[0]['modelSrc'],
+        modelType: 'llm',
+        modelConfig: { ctx_size: 4096, device: 'gpu' },
+        onProgress: (p) => send(`Downloading: ${p.percentage.toFixed(0)}%`, 5 + p.percentage * 0.93)
       })
-      req.on('error', (err: Error) => resolve({ ok: false, error: err.message }))
-      req.on('timeout', () => { req.destroy(); resolve({ ok: false, error: 'timeout' }) })
-      req.end()
-    })
+
+      appConfig.llmModelKey = modelKey
+      saveConfig()
+      send('Model ready!', 100)
+      return { success: true }
+    } catch (err) {
+      return { success: false, error: String(err) }
+    }
   })
 
   // AI-powered pack search — returns ranked array of pack IDs
@@ -904,7 +1058,7 @@ Example — user says "i want to work in medical industry":
         }
       ]
 
-      const result = completion({ modelId: state.llmId, history: messages, stream: true })
+      const result = completion({ modelId: state.llmId, history: messages, stream: true, kvCache: true })
       let responseText = ''
       for await (const token of result.tokenStream) {
         responseText += token

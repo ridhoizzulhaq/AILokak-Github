@@ -1,7 +1,14 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+
+interface ResumeProfile {
+  title?: string
+  experience_years?: number
+  skills?: string[]
+  summary?: string
+}
 
 interface HomeScreenProps {
-  onStartCustom: (jobDescription: string) => void
+  onStartCustom: (jobDescription: string, resumeContext?: string) => void
   modelsReady: boolean
   selectedPackIds?: string[]
 }
@@ -17,6 +24,49 @@ const PACK_LABELS: Record<string, string> = {
 
 export function HomeScreen({ onStartCustom, modelsReady, selectedPackIds = [] }: HomeScreenProps) {
   const [jobDescription, setJobDescription] = useState('')
+  const [resumeProfile, setResumeProfile] = useState<ResumeProfile | null>(null)
+  const [resumeText, setResumeText] = useState<string | null>(null)
+  const [ocrLoading, setOcrLoading] = useState(false)
+  const [ocrError, setOcrError] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  async function handleResumeUpload(e: React.ChangeEvent<HTMLInputElement>): Promise<void> {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setOcrLoading(true)
+    setOcrError(null)
+    setResumeProfile(null)
+    setResumeText(null)
+    try {
+      const buffer = await file.arrayBuffer()
+      const ocrResult = await window.qvacAPI.ocrExtract(buffer)
+      if (!ocrResult.success || !ocrResult.text) {
+        setOcrError(ocrResult.error ?? 'Could not read text from image')
+        return
+      }
+      setResumeText(ocrResult.text)
+      const analysis = await window.qvacAPI.analyzeResume(ocrResult.text)
+      if (analysis.success && analysis.profile) {
+        setResumeProfile(analysis.profile)
+      }
+    } catch (err) {
+      setOcrError(String(err))
+    } finally {
+      setOcrLoading(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
+
+  function buildResumeContext(): string | undefined {
+    if (!resumeText) return undefined
+    if (!resumeProfile) return resumeText
+    const parts: string[] = []
+    if (resumeProfile.title) parts.push(`Role: ${resumeProfile.title}`)
+    if (resumeProfile.experience_years) parts.push(`Experience: ${resumeProfile.experience_years} years`)
+    if (resumeProfile.skills?.length) parts.push(`Skills: ${resumeProfile.skills.slice(0, 8).join(', ')}`)
+    if (resumeProfile.summary) parts.push(`Summary: ${resumeProfile.summary}`)
+    return parts.join('. ')
+  }
 
   return (
     <div
@@ -186,8 +236,85 @@ export function HomeScreen({ onStartCustom, modelsReady, selectedPackIds = [] }:
             onFocus={(e) => (e.target.style.borderColor = '#B0ADA8')}
             onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
           />
+          {/* Resume upload */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--ink)' }}>
+              Resume (optional)
+            </label>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '10px 14px',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-md)',
+                cursor: ocrLoading ? 'not-allowed' : 'pointer',
+                opacity: ocrLoading ? 0.6 : 1,
+                transition: 'border-color 200ms ease',
+              }}
+              onClick={() => !ocrLoading && fileInputRef.current?.click()}
+              onMouseEnter={(e) => { if (!ocrLoading) (e.currentTarget as HTMLDivElement).style.borderColor = '#B0ADA8' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)' }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, color: 'var(--ink-secondary)' }}>
+                <path d="M4 1h6l4 4v10H2V1h2z" stroke="currentColor" strokeWidth="1.25" fill="none" strokeLinejoin="round" />
+                <path d="M10 1v4h4" stroke="currentColor" strokeWidth="1.25" fill="none" strokeLinejoin="round" />
+                <path d="M5 8h6M5 10.5h4" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+              </svg>
+              <span style={{ fontSize: 13, color: 'var(--ink-secondary)', flex: 1 }}>
+                {ocrLoading
+                  ? 'Reading resume…'
+                  : resumeProfile
+                    ? resumeProfile.title ?? 'Resume loaded'
+                    : 'Upload photo or screenshot of resume'}
+              </span>
+              {resumeProfile && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); setResumeProfile(null); setResumeText(null); setOcrError(null) }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 2,
+                    color: 'var(--ink-muted)',
+                    fontSize: 14,
+                    lineHeight: 1,
+                    flexShrink: 0,
+                  }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleResumeUpload}
+              style={{ display: 'none' }}
+            />
+            {ocrError && (
+              <span style={{ fontSize: 12, color: 'var(--pale-red-fg)' }}>{ocrError}</span>
+            )}
+            {resumeProfile?.skills && resumeProfile.skills.length > 0 && (
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                {resumeProfile.skills.slice(0, 6).map((skill) => (
+                  <span
+                    key={skill}
+                    className="tag"
+                    style={{ background: 'var(--pale-blue-bg)', color: 'var(--pale-blue-fg)', border: 'none', fontSize: 11 }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
           <button
-            onClick={() => onStartCustom(jobDescription)}
+            onClick={() => onStartCustom(jobDescription, buildResumeContext())}
             disabled={!modelsReady || !jobDescription.trim()}
             className="btn-primary"
             style={{ width: '100%', padding: '14px 24px', fontSize: 15 }}

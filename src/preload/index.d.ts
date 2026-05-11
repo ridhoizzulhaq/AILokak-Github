@@ -8,6 +8,7 @@ interface QvacAPI {
     questionNumber: number
     history: Array<{ role: string; content: string }>
     selectedPackIds?: string[]
+    resumeContext?: string
   }) => Promise<{ question?: string; error?: string }>
   evaluateAnswer: (args: {
     question: string
@@ -66,6 +67,11 @@ interface QvacAPI {
     txHash?: string
     error?: string
   }>
+  ocrExtract: (imageBuffer: ArrayBuffer) => Promise<{ success: boolean; text?: string; error?: string }>
+  analyzeResume: (resumeText: string) => Promise<{ success: boolean; profile?: { title?: string; experience_years?: number; skills?: string[]; industries?: string[]; achievements?: string[]; summary?: string }; error?: string }>
+  getConfig: () => Promise<{ packServerUrl: string; llmModelKey: string }>
+  setConfig: (patch: { packServerUrl?: string; llmModelKey?: string }) => Promise<{ success: boolean }>
+  switchLlmModel: (modelKey: string) => Promise<{ success: boolean; error?: string }>
   copyToClipboard: (text: string) => Promise<void>
   fetchPackCatalog: () => Promise<{
     ok: boolean

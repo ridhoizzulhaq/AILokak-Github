@@ -7,8 +7,9 @@ import { PackSearch } from './PackSearch'
 import { HistoryScreen } from './HistoryScreen'
 import { saveSession } from './HistoryScreen'
 import { WalletWidget } from './WalletWidget'
+import { ConfigScreen } from './ConfigScreen'
 
-type Page = 'home' | 'packs' | 'search' | 'history'
+type Page = 'home' | 'packs' | 'search' | 'history' | 'config'
 type InterviewScreen = 'home' | 'interview' | 'summary'
 
 interface Round {
@@ -65,6 +66,16 @@ const NAV_ITEMS: { id: Page; label: string; icon: React.ReactNode }[] = [
       </svg>
     ),
   },
+  {
+    id: 'config',
+    label: 'Settings',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.25" fill="none" />
+        <path d="M8 1.5v1.25M8 13.25V14.5M1.5 8h1.25M13.25 8H14.5M3.4 3.4l.88.88M11.72 11.72l.88.88M3.4 12.6l.88-.88M11.72 4.28l.88-.88" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 ]
 
 const DEFAULT_PACKS = ['behavioral-core', 'leadership-fundamentals', 'situational-judgment', 'software-engineering']
@@ -73,6 +84,7 @@ export function Layout({ modelsReady }: LayoutProps) {
   const [currentPage, setCurrentPage] = useState<Page>('home')
   const [interviewScreen, setInterviewScreen] = useState<InterviewScreen>('home')
   const [jobDescription, setJobDescription] = useState<string | undefined>()
+  const [resumeContext, setResumeContext] = useState<string | undefined>()
   const [sessionRounds, setSessionRounds] = useState<Round[]>([])
   const [selectedPackIds, setSelectedPackIds] = useState<string[]>(DEFAULT_PACKS)
 
@@ -87,8 +99,9 @@ export function Layout({ modelsReady }: LayoutProps) {
     return 'both'
   })()
 
-  const handleStartCustom = (jd: string): void => {
+  const handleStartCustom = (jd: string, rc?: string): void => {
     setJobDescription(jd)
+    setResumeContext(rc)
     setInterviewScreen('interview')
   }
 
@@ -109,13 +122,14 @@ export function Layout({ modelsReady }: LayoutProps) {
   const handleRestart = (): void => {
     setSessionRounds([])
     setJobDescription(undefined)
+    setResumeContext(undefined)
     setInterviewScreen('home')
   }
 
   const renderMain = () => {
     if (currentPage === 'home') {
       if (interviewScreen === 'interview') {
-        return <InterviewSession jobDescription={jobDescription} onFinish={handleFinish} selectedPackIds={selectedPackIds} inputMode={resolvedInputMode} onBack={handleRestart} />
+        return <InterviewSession jobDescription={jobDescription} resumeContext={resumeContext} onFinish={handleFinish} selectedPackIds={selectedPackIds} inputMode={resolvedInputMode} onBack={handleRestart} />
       }
       if (interviewScreen === 'summary') {
         return <SessionSummary rounds={sessionRounds} onRestart={handleRestart} onBack={handleRestart} />
@@ -130,6 +144,9 @@ export function Layout({ modelsReady }: LayoutProps) {
     }
     if (currentPage === 'history') {
       return <HistoryScreen />
+    }
+    if (currentPage === 'config') {
+      return <ConfigScreen />
     }
     return null
   }
@@ -185,7 +202,7 @@ export function Layout({ modelsReady }: LayoutProps) {
         <nav style={{ flex: 1, padding: '10px 8px', display: 'flex', flexDirection: 'column', gap: 2 }}>
           {NAV_ITEMS.map((item) => {
             const isActive = currentPage === item.id
-            const isDisabled = isInterviewActive && item.id !== 'home'
+            const isDisabled = isInterviewActive && item.id !== 'home' && item.id !== 'config'
             return (
               <button
                 key={item.id}

@@ -14,6 +14,7 @@ type InputMode = 'text' | 'audio' | 'both'
 
 interface InterviewSessionProps {
   jobDescription?: string
+  resumeContext?: string
   selectedPackIds?: string[]
   inputMode?: InputMode
   onFinish: (rounds: QuestionRound[]) => void
@@ -100,20 +101,24 @@ interface GrammarPair { wrong: string; correct: string }
 
 function parseGrammarPairs(text: string): GrammarPair[] {
   if (!text) return []
-  const cleaned = text.replace(/\*\*/g, '').replace(/^\*+\s*/gm, '').trim()
+  // Strip markdown bold, then strip leading list prefixes (-, •, *, 1.) from each line
+  const cleaned = text
+    .replace(/\*\*/g, '')
+    .replace(/^\s*(?:\*+|-+|•|\d+\.)\s*/gm, '')
+    .trim()
   const firstLine = cleaned.split('\n')[0].trim()
-  if (/^(clean|no (major )?issues?|none)\.?$/i.test(firstLine)) return []
+  if (/^(clean|no (major )?issues?|none|no errors?)\.?$/i.test(firstLine)) return []
 
   const lines = cleaned.split('\n').map((l) => l.trim()).filter(Boolean)
   const pairs: GrammarPair[] = []
+  const QUOTE = /^["""'`‘’“”]|["""'`‘’“”]$/g
 
   for (const line of lines) {
-    // Only accept explicit arrow format: wrong -> correct
-    const m = line.match(/^["""']?(.+?)["""']?\s*(?:->|=>|→|—>)\s*["""']?(.+?)["""']?\s*$/)
+    const m = line.match(/^["""'`“”]?(.+?)["""'`“”]?\s*(?:->|=>|→|—>|–>)\s*["""'`“”]?(.+?)["""'`“”]?\s*$/)
     if (m) {
       pairs.push({
-        wrong: m[1].trim().replace(/^[""`'"]|[""`'"]$/g, ''),
-        correct: m[2].trim().replace(/^[""`'"]|[""`'"]$/g, '')
+        wrong: m[1].trim().replace(QUOTE, '').trim(),
+        correct: m[2].trim().replace(QUOTE, '').trim()
       })
     }
   }
@@ -290,7 +295,7 @@ function ExampleAnswer({ text }: { text: string }) {
   )
 }
 
-export function InterviewSession({ jobDescription, selectedPackIds, inputMode = 'both', onFinish, onBack }: InterviewSessionProps) {
+export function InterviewSession({ jobDescription, resumeContext, selectedPackIds, inputMode = 'both', onFinish, onBack }: InterviewSessionProps) {
   const [phase, setPhase] = useState<SessionPhase>('generating-question')
   const [currentQ, setCurrentQ] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState('')
@@ -376,6 +381,7 @@ export function InterviewSession({ jobDescription, selectedPackIds, inputMode = 
       questionNumber: currentQ + 1,
       history: historyRef.current,
       selectedPackIds,
+      resumeContext,
     })
 
     cleanupTokens.current?.()
@@ -408,7 +414,7 @@ export function InterviewSession({ jobDescription, selectedPackIds, inputMode = 
       : inputMode === 'text' ? 'Type your answer below'
       : 'Press the microphone to record, or type below'
     )
-  }, [currentQ, category, jobDescription, inputMode])
+  }, [currentQ, category, jobDescription, resumeContext, inputMode])
 
   useEffect(() => {
     generateQuestion()

@@ -1,0 +1,114 @@
+{
+  "id": "swe-real-cases",
+  "name": "Software Engineer: Real Cases",
+  "description": "Scenario-based SWE interview questions grounded in real engineering situations — production incidents, delivery trade-offs, team dynamics, and architectural decisions under pressure.",
+  "category": "Technical",
+  "questions_count": 15,
+  "inputMode": "both",
+  "price_usdt": 0.0001,
+  "author": "Reza Putra",
+  "mentor": {
+    "name": "Reza Putra",
+    "role": "Senior Engineer · Product Scale",
+    "avatar": "RP"
+  },
+  "industries": ["tech", "startup", "enterprise"],
+  "roles": [
+    "software-engineer",
+    "senior-engineer",
+    "backend-engineer",
+    "fullstack-engineer"
+  ],
+  "questions": [
+    {
+      "category": "technical",
+      "question": "You are on-call on a Saturday night. Alerts fire: error rate on your payment service jumped from 0.1% to 18% in the last five minutes. Walk me through exactly what you do from the moment you see the alert.",
+      "ideal_answer": "Acknowledge the alert immediately and check if anyone else is already responding to avoid duplicate work. Open the metrics dashboard: look at error rate, latency, and throughput together — a combined spike suggests a code change or dependency failure; latency up but throughput down suggests a bottleneck. Check recent deployments in the last 30-60 minutes — most production fires are caused by recent changes. Look at structured logs: filter by the error status codes that are spiking, read the stack traces, identify which service or dependency is throwing. If a recent deploy is the most likely cause and the business impact is high, rollback immediately rather than debugging in production. Notify stakeholders proactively: a brief message like 'Payment service is degraded, investigating, ETA for update in 15 min' prevents escalation. After stabilizing, write a brief incident timeline so the team has context when they wake up. The goal is to minimize customer impact first, understand root cause second.",
+      "evaluation_criteria": "Alert acknowledgment and parallel escalation check, systematic metric correlation (error+latency+throughput), deployment as first hypothesis, log-based diagnosis, rollback decision, proactive stakeholder communication, incident documentation"
+    },
+    {
+      "category": "technical",
+      "question": "You inherit a codebase with no tests, no documentation, and zero observability. The team is afraid to touch it. What is your plan for the first 90 days?",
+      "ideal_answer": "First 30 days — understand before changing. Read the code top-down starting from the entry points. Follow one complete request path end-to-end. Draw a rough architecture diagram. Interview the people who built it; they carry knowledge not in the code. Identify the scariest parts (highest risk, most business-critical, most frequently touched). Do not refactor yet. First 60 days — add safety nets. Introduce structured logging and basic health endpoints with zero functional change. Write characterization tests: tests that capture current behavior, not ideal behavior. These tests are not checking correctness, they are preventing regression. Start with the scariest code path. First 90 days — make one targeted improvement. Pick one well-understood module, refactor it with tests, deploy it, monitor it. This builds team confidence and proves the approach works. Avoid the temptation to rewrite everything — incremental improvements with tests beats a 6-month rewrite that ships broken.",
+      "evaluation_criteria": "Read before change discipline, entry-point navigation, knowledge capture from people, characterization tests concept, logging before refactoring, incremental confidence building, anti-rewrite stance"
+    },
+    {
+      "category": "behavioral",
+      "question": "Your tech lead proposes a solution you believe is wrong — you think it will cause serious performance problems at scale. The rest of the team seems fine with it. What do you do?",
+      "ideal_answer": "First, make sure I actually understand the proposal fully before criticizing. Ask questions: 'Can you walk me through how this handles the case where traffic is 10x current load?' Often the tech lead has already considered the concern. If the concern stands after understanding: raise it privately first, not in a group setting. Share specific technical evidence — not 'I think this is slow' but 'at 10k requests/second, this query will scan the full table every time because there is no index on this column — here's a benchmark I ran.' If still overruled: document the concern in the design doc or ticket so the decision and its reasoning are traceable. Then commit fully to making the chosen approach work as well as possible. If the issue surfaces later, revisit the data without 'I told you so'. The goal is to be right eventually, not to win the argument today.",
+      "evaluation_criteria": "Understanding before criticizing, private before public, specific evidence, documentation of dissent, full commitment after decision, no 'I told you so', data-driven revisit"
+    },
+    {
+      "category": "technical",
+      "question": "You are asked to add a new feature. During investigation you realize the correct implementation will take three weeks, but the PM wants it in three days for a major client demo. What do you do?",
+      "ideal_answer": "Do not just say yes to three days or no to the demo — explore the scope. Ask: what specifically needs to work in the demo? Often the answer is a subset of the full feature. A demo can run on fake data, a happy path only, or a pre-configured environment. Propose a demo cut: a version that looks right for the demo but is not production-ready. Be explicit that this is a demo-only build and needs to be replaced before general availability. Get the PM and team to acknowledge this explicitly to avoid the demo version becoming the production version. Separately, document the full implementation plan and timeline so there is a clear path after the demo. Be honest about what corners are being cut and what the risks are. This is a business decision, not just a technical one.",
+      "evaluation_criteria": "Scope negotiation before committing to timeline, demo cut concept, explicit non-production labeling, stakeholder sign-off on the compromise, full plan alongside demo, honesty about risks"
+    },
+    {
+      "category": "technical",
+      "question": "You open a pull request and the reviewer leaves 47 comments. Some are blocking, many are stylistic preferences. How do you handle this?",
+      "ideal_answer": "Separate the comments into categories: genuine bugs or correctness issues, design concerns, style preferences, and questions. Prioritize and address correctness issues immediately — those are clear wins. For design concerns, discuss them directly: schedule a short call if the back-and-forth is getting long. For style preferences: if there is an existing style guide, point to it. If not, ask whether this should become a documented convention rather than a per-PR battle. If the style concern is subjective and the reviewer feels strongly, often it is more pragmatic to comply and then propose a lint rule that enforces it consistently. Respond to every comment, even a simple acknowledgment. Do not go silent. If the review itself seems disproportionate — 47 comments on a small PR — talk to your tech lead about whether the review culture needs calibration. Reviews are for correctness and maintainability, not personal preference enforcement.",
+      "evaluation_criteria": "Comment categorization, correctness first, async vs sync trade-off, style guide vs preference, lint rule proposal, response to every comment, review culture escalation, proportionality awareness"
+    },
+    {
+      "category": "technical",
+      "question": "A senior engineer on your team pushes code directly to main, bypassing code review, and justifies it by saying the fix was urgent. This has happened three times this month. What do you do?",
+      "ideal_answer": "Address it directly with the engineer first, not via the manager or Slack channel. Understand their perspective: was the review process actually too slow in those situations? A legitimate frustration with a slow review process can lead to this workaround. If the process is the problem, fix the process — establish a fast-track review option for genuine emergencies (one reviewer, 15-minute SLA). If the behavior is bypassing review because they disagree with the process, that is different. Frame the conversation around risk: unreviewed code introduces bugs that cost more time than reviews save. If the behavior continues after the conversation, bring it to the tech lead as a process compliance issue, not a personal complaint. Propose a branch protection rule that enforces review as a technical control — remove the ability to bypass rather than relying on discipline alone.",
+      "evaluation_criteria": "Direct conversation first, process root cause exploration, fast-track emergency review proposal, risk framing, escalation path, branch protection as technical enforcement"
+    },
+    {
+      "category": "technical",
+      "question": "Your service starts receiving 10x its normal traffic due to an unexpected viral moment. The database is maxing out CPU. You have 20 minutes before the site goes down. What do you do right now?",
+      "ideal_answer": "First: enable read replicas if not already routing reads there — many services only write to primary but can shift read traffic to replicas immediately. Second: check for missing indexes on the most frequent queries — a full table scan at 10x load is catastrophic. An index can be added with CONCURRENTLY in Postgres (no table lock). Third: enable query caching at the application layer for the most expensive repeated queries if not already present. Fourth: if the database is still overwhelmed, shed load: rate limit or queue incoming requests rather than letting them all hit the database and crash everything. Fifth: scale horizontally — if the application tier is stateless, add instances immediately. The database is the bottleneck, so additional app servers help only after the DB problem is addressed. Communication: update status page and notify the team simultaneously. After the incident: do a proper capacity review.",
+      "evaluation_criteria": "Read replica routing, index check, application-layer caching, load shedding over crashing, horizontal scale vs DB bottleneck distinction, status page communication, post-incident review intent"
+    },
+    {
+      "category": "behavioral",
+      "question": "You are halfway through a two-week sprint. You realize the feature you are building will not work as designed — a core assumption was wrong. The sprint review is in one week. What do you do?",
+      "ideal_answer": "Raise it immediately — do not wait for the sprint review. Call a quick sync with the PM and tech lead today: 'I found a problem with the current approach. Here's what the assumption was, here's why it doesn't hold, and here are three options for how we could handle this.' Come with options, not just the problem. Options might be: (1) rethink the approach — takes two more weeks but ships the right thing. (2) ship a reduced scope that works within the original assumption. (3) ship a stub or toggle that buys time for the real fix. Get alignment on the path quickly so the remaining week is not wasted. The worst outcome is discovering this at the sprint review — the team loses the full two weeks and surprises stakeholders. Early transparency, even when uncomfortable, is the professional choice.",
+      "evaluation_criteria": "Immediate escalation, structured problem presentation with options, not just problem report, option tradeoff framing, alignment before wasting more sprint time, sprint review surprise prevention, transparency as default"
+    },
+    {
+      "category": "technical",
+      "question": "You are reviewing a junior engineer's PR. The code works correctly but is hard to read and uses a pattern that will be difficult to extend. How do you structure your feedback?",
+      "ideal_answer": "Start by identifying what they did well — acknowledge the correct behavior, tests, or good patterns. Then separate concerns: blocking issues (maintainability problems significant enough to require change before merge) vs suggestions (improvements that would be nice but not blocking). Explain the why behind each concern, not just the what. 'This is hard to extend because when we add the third state type, this switch statement will need to change in four places — here's a pattern that keeps it to one place.' Offer an example, not just a critique: sketch the alternative approach inline or in a comment. Keep the tone collaborative, not authoritative: 'Have you considered X?' versus 'Do it this way.' For junior engineers especially, frame feedback as a learning opportunity. Follow up after they push changes to close the loop — do not leave them wondering if the second version was better.",
+      "evaluation_criteria": "Acknowledge strengths first, blocking vs suggestion separation, why not just what, concrete alternative offered, collaborative tone, follow-up discipline"
+    },
+    {
+      "category": "technical",
+      "question": "Your team just shipped a feature that caused a 15% drop in conversion rate. The feature is now rolled back. How do you run the post-mortem?",
+      "ideal_answer": "Schedule it within 48 hours while the details are fresh, but after the immediate fire is out. The format: blameless. The goal is systemic learning, not accountability assignment. Structure: (1) Timeline — what happened and when, from the first merge to the rollback. Include the metrics that showed the problem and how long before someone noticed. (2) Root cause — what in the system made this possible? Not 'the engineer wrote bad code' but 'our feature flag did not allow gradual rollout, so 100% of users got the change at once' or 'there was no conversion funnel monitoring in our alerting'. (3) Action items — concrete changes that prevent recurrence: add canary rollout, add conversion rate to alerts, add a pre-launch checklist item for revenue-impacting features. Action items need owners and deadlines, otherwise they disappear. Share the post-mortem doc with the wider team — the lesson has value beyond the people in the room.",
+      "evaluation_criteria": "Blameless framing, 48-hour timing, timeline construction, systemic root cause vs person blame, concrete action items with owners, alerting gap identification, wide sharing of learnings"
+    },
+    {
+      "category": "technical",
+      "question": "The CI/CD pipeline for your team takes 45 minutes to complete. Engineers are losing motivation to write tests and are batching commits to reduce wait time. How do you fix this?",
+      "ideal_answer": "First, profile the pipeline to find where time is spent. Common culprits: slow test suite (sequential when it could be parallel, or too many integration tests that hit real services), slow build step (no caching of dependencies or artifacts), environment provisioning, or unnecessary sequential stages that could run in parallel. For the test suite: split unit, integration, and e2e tests into separate stages that can run concurrently. Run fast tests first and fail fast. Use test sharding across parallel workers. Cache dependencies between runs (node_modules, Maven cache, pip cache). For builds: cache Docker layers, use buildkit with layer caching, avoid rebuilding unchanged artifacts. Target: unit tests in under 5 minutes, full pipeline under 15 minutes. The batching behavior is a symptom of the pain — once the pipeline is fast, the behavior will naturally revert. Measure before and after and share the improvement to rebuild team confidence in CI.",
+      "evaluation_criteria": "Profile before optimizing, parallel stage identification, test categorization (unit/integration/e2e), dependency caching, fast-fail ordering, concrete time targets, behavior is symptom framing, measurement and communication"
+    },
+    {
+      "category": "behavioral",
+      "question": "You have been asked to estimate a project. After investigation you believe it will take four months. Your manager says the business needs it in six weeks. What do you do?",
+      "ideal_answer": "Do not simply agree to six weeks — that sets the team up to fail and damages credibility. Do not simply refuse — that doesn't solve the business problem. Instead, negotiate scope. Ask: what are the must-have outcomes in six weeks? Often a project has a core that can be built in six weeks if non-essentials are deferred. Break the four months into phases: what ships in six weeks, what ships in twelve weeks. Get alignment on the phased plan. If after scope negotiation the business truly needs the full four months of work in six weeks, escalate the risk clearly: 'If we commit to six weeks with full scope, here is the risk we are taking — shortcuts that create technical debt, the likelihood of needing a phase 2 to fix them.' Document the estimate and the constraint so there is a record. Never silently commit to a timeline you know is impossible.",
+      "evaluation_criteria": "Refusal to silently accept impossible timeline, scope negotiation, phased delivery proposal, explicit risk communication, documentation of constraint, credibility preservation as long-term concern"
+    },
+    {
+      "category": "technical",
+      "question": "You are building a new microservice. A teammate suggests using a message queue for all communication between services. Another suggests synchronous REST calls. How do you decide?",
+      "ideal_answer": "The right choice depends on the communication pattern, not on what is more modern or scalable in the abstract. Synchronous REST: appropriate when the caller needs a result before continuing, when the operation is query-like (reads, lookups), when failure should block the caller (payment confirmation), and when the latency of the network hop is acceptable. Message queue (async): appropriate when the caller does not need an immediate response, when the operation is write-like and can be processed eventually (email sending, report generation, analytics events), when you want to decouple producer from consumer availability, and when you need at-least-once delivery guarantees and retry with backoff. Anti-pattern: using async messaging for everything because it sounds more scalable — this makes the system harder to debug (distributed tracing across async steps is hard), harder to reason about (eventual consistency everywhere), and introduces failure modes (message loss, double processing) that need explicit handling. Start with synchronous for anything that requires a result; move to async when there is a concrete reason.",
+      "evaluation_criteria": "Decision is pattern-specific not preference-based, synchronous use cases, async use cases, async debugging complexity, eventual consistency cost, double processing handling, concrete reason requirement for async"
+    },
+    {
+      "category": "behavioral",
+      "question": "You finished a project and the metrics look great — but six weeks later you notice a slow degradation in performance that traces back to a design decision you made. The issue was not obvious at the time. How do you handle it?",
+      "ideal_answer": "Own it proactively — do not wait for someone else to find it or for it to become a crisis. Bring it to the team with a clear description of what you found, why it is happening, and the expected trajectory if not addressed. Avoid minimizing ('it is fine for now') and avoid catastrophizing ('this is a disaster'). Propose a remediation plan with effort estimate: is this a quick index addition, or a re-architecture? If the root cause was a decision that seemed reasonable at the time, document what information was missing or what assumption proved wrong — this is more useful than blame. If the team needs to decide between addressing it now vs. living with it longer, provide the data to make that decision (rate of degradation, user impact threshold, effort to fix). Proactive disclosure and a clear plan converts a potential credibility hit into a demonstration of engineering maturity.",
+      "evaluation_criteria": "Proactive disclosure before crisis, factual impact description, remediation plan with estimate, no minimizing or catastrophizing, missing information vs blame framing, team data for priority decision, credibility through transparency"
+    },
+    {
+      "category": "technical",
+      "question": "Your team is debating whether to continue maintaining a legacy monolith or migrate to microservices. Leadership wants a recommendation from you. What do you tell them?",
+      "ideal_answer": "Do not recommend microservices by default because they are modern. Microservices solve specific problems: independent deployability of teams, different scaling requirements per component, technology heterogeneity needs, and organizational scale (Conway's Law — large teams moving at different speeds). If the monolith's problems are: slow builds and tests, a tangled dependency graph that makes changes risky, a single team that steps on each other — these are solvable within a well-structured monolith (modular monolith). The migration cost is high: distributed systems complexity, network call failure modes, distributed transactions, operational overhead of many services, latency increase. Recommendation framework: (1) Identify the specific pain. (2) Check whether the pain is organizational scale or technical complexity. (3) If technical, a modular monolith with clear module boundaries often solves it with lower cost. (4) If organizational — multiple large teams needing independent deployment — then microservices. If migrating: extract the highest-traffic or most independently changing component first; do not attempt a big-bang migration.",
+      "evaluation_criteria": "Anti-default-microservices stance, specific problems microservices solve, modular monolith alternative, distributed systems cost enumeration, pain identification before recommendation, organizational vs technical scale distinction, strangler fig extraction over big-bang"
+    }
+  ]
+}

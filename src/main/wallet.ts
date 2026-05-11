@@ -100,7 +100,7 @@ export async function getBalance(): Promise<{ usdt0: string }> {
   return { usdt0: (Number(raw) / 1_000_000).toFixed(6) }
 }
 
-export async function purchasePack(packId: string): Promise<{
+export async function purchasePack(packId: string, serverUrl?: string): Promise<{
   success: boolean
   questions?: Array<{
     category: string
@@ -124,7 +124,7 @@ export async function purchasePack(packId: string): Promise<{
     })
     const httpClient = new t402HTTPClient(client)
 
-    const url = `${PACK_SERVER_URL}/packs/${packId}`
+    const url = `${serverUrl ?? PACK_SERVER_URL}/packs/${packId}`
 
     // First request — expect 402
     const firstRes = await fetch(url)
@@ -158,12 +158,14 @@ export async function purchasePack(packId: string): Promise<{
       headers: { ...paymentHeaders, Accept: 'application/json' },
     })
 
+    const rawText = await paidRes.text()
+    console.log('[payment:response]', paidRes.status, rawText)
+
     if (!paidRes.ok) {
-      const errText = await paidRes.text().catch(() => paidRes.statusText)
-      return { success: false, error: `Payment failed: ${paidRes.status} ${errText}` }
+      return { success: false, error: `Payment failed: ${paidRes.status} ${rawText}` }
     }
 
-    const data = await paidRes.json()
+    const data = JSON.parse(rawText)
     return { success: true, questions: data.questions, txHash: data.txHash ?? undefined }
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err)

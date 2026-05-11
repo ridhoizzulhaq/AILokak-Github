@@ -13,6 +13,7 @@ const qvacAPI = {
     questionNumber: number
     history: Array<{ role: string; content: string }>
     selectedPackIds?: string[]
+    resumeContext?: string
   }) => ipcRenderer.invoke('generate-question', args),
 
   evaluateAnswer: (args: {
@@ -62,6 +63,16 @@ const qvacAPI = {
   // Mic control (FFmpeg-based, main process owns mic)
   startListening: () => ipcRenderer.invoke('start-listening'),
   stopListening: () => ipcRenderer.invoke('stop-listening'),
+
+  ocrExtract: (imageBuffer: ArrayBuffer) =>
+    ipcRenderer.invoke('ocr-extract', Buffer.from(imageBuffer)),
+  analyzeResume: (resumeText: string) =>
+    ipcRenderer.invoke('analyze-resume', resumeText),
+
+  getConfig: () => ipcRenderer.invoke('get-config'),
+  setConfig: (patch: { packServerUrl?: string; llmModelKey?: string }) =>
+    ipcRenderer.invoke('set-config', patch),
+  switchLlmModel: (modelKey: string) => ipcRenderer.invoke('switch-llm-model', modelKey),
 
   copyToClipboard: (text: string) => ipcRenderer.invoke('copy-to-clipboard', text),
   fetchPackCatalog: () => ipcRenderer.invoke('fetch-pack-catalog'),

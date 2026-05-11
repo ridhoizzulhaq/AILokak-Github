@@ -1,9 +1,3 @@
----
-noteId: "a1e4b5604d3211f193a15fde28ddc467"
-tags: []
-
----
-
 # AILokak
 
 **Local-first AI interview coach: private, offline, freedom.**

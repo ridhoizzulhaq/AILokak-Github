@@ -6,6 +6,16 @@ Built for the **Tether Frontier Hackathon Track**.
 
 ---
 
+## Download
+
+[![Download DMG](https://img.shields.io/badge/Download-v1.0.0--beta%20(macOS%20arm64)-black?style=for-the-badge&logo=apple)](https://github.com/ridhoizzulhaq/AILokak-Github/releases/tag/1.0.0)
+
+> **Note:** Only tested on **MacBook Air M1**. macOS may show "unidentified developer" — right-click → Open to bypass.
+>
+> **Pack server** (`http://13.221.44.63:4021`) may be offline. Run locally or change URL in app Settings. See [Marketplace Pack Server](#marketplace-pack-server-optional).
+
+---
+
 ## What It Does
 
 AILokak is a local AI interview coach platform powered by **Tether QVAC** that eliminates data harvesting and recurring subscriptions. By running entirely on local hardware, it ensures total data sovereignty and permanent free access.
@@ -122,8 +132,6 @@ const resumeText = result.blocks.map(b => b.text).join('\n')
 
 ### RAG Architecture
 
-![OCR Architecture]()
-
 AILokak uses Retrieval-Augmented Generation (RAG) to ground every question and evaluation in real interview knowledge, reducing hallucinations and improving relevance.
 
 ```text
@@ -149,7 +157,8 @@ The knowledge base includes:
 ---
 
 ### Resume Upload (OCR)
-![OCR Architecture](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@412d36b74ad6888218a39383d57f0a4e7d623469/uploads/2026-05-11T15-54-30-642Z-qdw7eni2x.png)
+
+![OCR](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@412d36b74ad6888218a39383d57f0a4e7d623469/uploads/2026-05-11T15-54-30-642Z-qdw7eni2x.png)
 
 AILokak can read your resume and use it to tailor interview questions to your actual background.
 
@@ -179,20 +188,21 @@ Questions and evaluations personalized to your resume
 ---
 
 ### Choose Your Language Model
-![OCR Architecture](https://raw.githubusercontent.com/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design/d211950de3042021d4efa8afd45567fbe86f417a/uploads/2026-05-11T16-02-54-811Z-z3j0ywj53.png)
+
+![Model Switcher](https://raw.githubusercontent.com/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design/d211950de3042021d4efa8afd45567fbe86f417a/uploads/2026-05-11T16-02-54-811Z-z3j0ywj53.png)
 
 AILokak lets you switch the underlying LLM at any time from the **Settings** screen (sidebar → Settings icon).
 
 Available models:
 
-| Model                | Size    | RAM    | Notes                        |
-| -------------------- | ------- | ------ | ---------------------------- |
-| Qwen3 0.6B           | 356 MB  | 2 GB   | Fastest, lowest quality      |
-| Qwen3 1.7B           | 1.0 GB  | 4 GB   | Default, balanced            |
-| Qwen3 4B             | 2.3 GB  | 6 GB   | Better answers               |
-| Qwen3 8B             | 4.7 GB  | 10 GB  | High quality                 |
-| Llama 3.2 1B         | 737 MB  | 3 GB   | Fast Meta alternative        |
-| Unsloth GPT-OSS 20B  | 10.8 GB | 16 GB  | Largest, best quality        |
+| Model               | Size    | RAM   | Notes                   |
+| ------------------- | ------- | ----- | ----------------------- |
+| Qwen3 0.6B          | 356 MB  | 2 GB  | Fastest, lowest quality |
+| Qwen3 1.7B          | 1.0 GB  | 4 GB  | Default, balanced       |
+| Qwen3 4B            | 2.3 GB  | 6 GB  | Better answers          |
+| Qwen3 8B            | 4.7 GB  | 10 GB | High quality            |
+| Llama 3.2 1B        | 737 MB  | 3 GB  | Fast Meta alternative   |
+| Unsloth GPT-OSS 20B | 10.8 GB | 16 GB | Largest, best quality   |
 
 **How switching works:**
 
@@ -348,8 +358,8 @@ Each `.json` file inside `pack-server/packs/`:
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/ridhoizzulhaq/AILokak.git
-cd AILokak
+git clone https://github.com/ridhoizzulhaq/AILokak-Github.git
+cd AILokak-Github
 npm install
 ```
 
@@ -383,7 +393,9 @@ The marketplace pack server is deployed at:
 http://13.221.44.63:4021
 ```
 
-The pack server URL can also be changed at any time from inside the app: **sidebar → Settings → Pack Server**.
+> **Note:** The pack server may be offline. If packs fail to load, run locally (see below) and update the URL in app Settings.
+
+The pack server URL can be changed at any time from inside the app: **sidebar → Settings → Pack Server**.
 
 ### Run Locally
 
@@ -441,22 +453,5 @@ resources/
 ```
 
 ---
-
-## Development
-
-```bash
-npm run dev
-```
-
----
-
-## Tech Stack
-
-* **Electron** + **electron-vite**
-* **React** + **TypeScript** + **Tailwind CSS v4**
-* **@qvac/sdk** — LLM, Whisper, Embeddings, OCR, RAG
-* **Piper TTS** — offline neural text-to-speech
-* **x402 / t402** — micropayment-gated marketplace packs
-* **Tether WDK** — non-custodial wallet (auto-generated per user)
 
 

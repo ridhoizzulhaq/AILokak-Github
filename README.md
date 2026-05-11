@@ -460,6 +460,7 @@ resources/
 
 ---
 
+<<<<<<< HEAD
 ## Development
 
 ```bash
@@ -476,3 +477,6 @@ npm run dev
 * **Piper TTS** — offline neural text-to-speech
 * **x402 / t402** — micropayment-gated marketplace packs
 * **Tether WDK** — non-custodial wallet (auto-generated per user)
+=======
+
+>>>>>>> 80924989faeccc5db8e66f734b0cb31ac343b725

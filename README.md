@@ -16,6 +16,7 @@ Built for the **Tether Frontier Hackathon Track**.
 >
 > **Pack server** (`http://13.221.44.63:4021`) may be offline. Run locally or change URL in app Settings. See [Marketplace Pack Server](#marketplace-pack-server-optional).
 
+>You can also [setup from source](#option-b--run-from-source) if you prefer.
 ---
 
 ## What It Does

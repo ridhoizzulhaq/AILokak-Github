@@ -395,9 +395,10 @@ npm install
 
 ### 2. Download Piper TTS Model
 
-Download and place the following files inside `vits-piper-en_US-ryan-high/`:
+Download and place the following files inside `resources/`:
 
 ```text
+resources/
 ├── en_US-ryan-high.onnx
 └── en_US-ryan-high.onnx.json
 ```

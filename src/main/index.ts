@@ -83,7 +83,7 @@ let sdk: typeof import('@qvac/sdk') | null = null
 
 async function getSDK(): Promise<typeof import('@qvac/sdk')> {
   if (!sdk) {
-    if (process.resourcesPath && !process.env.QVAC_WORKER_PATH) {
+    if (app.isPackaged && !process.env.QVAC_WORKER_PATH) {
       const { join: pathJoin } = await import('path')
       const workerPath = pathJoin(
         process.resourcesPath,

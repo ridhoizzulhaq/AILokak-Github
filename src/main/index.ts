@@ -8,6 +8,17 @@ import { tmpdir } from 'os'
 process.stdout.on('error', (err: NodeJS.ErrnoException) => { if (err.code !== 'EPIPE') throw err })
 process.stderr.on('error', (err: NodeJS.ErrnoException) => { if (err.code !== 'EPIPE') throw err })
 
+// Extend PATH for packaged app — Homebrew binaries not in Electron's default PATH
+if (process.platform === 'darwin') {
+  process.env.PATH = [
+    '/opt/homebrew/bin',
+    '/usr/local/bin',
+    '/usr/bin',
+    '/bin',
+    process.env.PATH
+  ].filter(Boolean).join(':')
+}
+
 const is = { dev: process.env.NODE_ENV === 'development' }
 const electronApp = {
   setAppUserModelId: (id: string) => {
@@ -71,7 +82,23 @@ function savePackToDisk(packId: string, questions: unknown[]): void {
 let sdk: typeof import('@qvac/sdk') | null = null
 
 async function getSDK(): Promise<typeof import('@qvac/sdk')> {
-  if (!sdk) sdk = await import('@qvac/sdk')
+  if (!sdk) {
+    if (process.resourcesPath && !process.env.QVAC_WORKER_PATH) {
+      const { join: pathJoin } = await import('path')
+      const workerPath = pathJoin(
+        process.resourcesPath,
+        'app.asar.unpacked',
+        'node_modules',
+        '@qvac',
+        'sdk',
+        'dist',
+        'server',
+        'worker.js'
+      )
+      process.env.QVAC_WORKER_PATH = workerPath
+    }
+    sdk = await import('@qvac/sdk')
+  }
   return sdk
 }
 

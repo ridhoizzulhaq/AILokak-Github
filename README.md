@@ -2,18 +2,28 @@
 
 **Local-first AI interview coach: private, offline, freedom.**
 
-Built for the **Tether Frontier Hackathon Track**.
+**[▶ Watch Demo](https://youtube.com/watch?v=g4TzYx3tNbo)** · **[📄 Slide Deck](https://drive.google.com/file/d/1ao8VlCJgYcHs3WBUQUyyEOtmFG7x0UwV/view?usp=drive_link)**
 
 ---
 
 ## Download
 
-[![Download DMG](https://img.shields.io/badge/Download-v1.0.0--beta%20(macOS%20arm64)-black?style=for-the-badge&logo=apple)](https://github.com/ridhoizzulhaq/AILokak-Github/releases/tag/1.0.0)
+[![Download](https://img.shields.io/badge/Download-v1.0.0--beta%20(macOS%20arm64)-black?style=for-the-badge&logo=apple)](https://github.com/ridhoizzulhaq/AILokak-Github/releases/tag/1.0.0)
 
-> **Note:** Only tested on **MacBook Air M1**. macOS may show "unidentified developer" — right-click → Open to bypass.
+**Install:**
+1. Download `AILokak-1.0.0-arm64.zip` from the release
+2. Extract → drag `AILokak.app` to Applications
+3. Remove quarantine (required for unsigned apps):
+   ```bash
+   sudo xattr -dr com.apple.quarantine /Applications/AILokak.app
+   ```
+4. Launch — AI models download automatically on first use (~2–3 GB, requires internet)
+
+> **Note:** Only tested on **MacBook Air M1**. Requires ~5 GB free disk space.
 >
 > **Pack server** (`http://13.221.44.63:4021`) may be offline. Run locally or change URL in app Settings. See [Marketplace Pack Server](#marketplace-pack-server-optional).
 
+> Prefer to run from source? See [Option B](#option-b--run-from-source).
 ---
 
 ## What It Does
@@ -34,10 +44,24 @@ AI evaluation
 Session summary
 ```
 
-![Architecture](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@28e88232e250f9338a0b443ff89b200b3218a9f5/uploads/2026-05-09T19-56-48-774Z-scipa80hr.png)
+![Architecture](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@d5a90ff8456a3bc0a64b58881c263f248c87994f/uploads/2026-05-11T19-54-41-315Z-yu61m587v.png)
 
 ---
+## Why AILokak?
 
+Cloud-based interview coaching platforms like Final Round AI charge **$150/month** for a basic plan, and they claim over 10 million users. But there are real problems with that model: fresh graduates, the people who need interview prep most, can't afford it. The question banks are built solely by the platform with no verified input from experienced professionals. And even with "stealth mode," there's no guarantee your voice data isn't being harvested ([BBC has reported on this](https://www.bbc.com/news/articles/c3d9zv50955o).
+
+AILokak takes a fundamentally different approach:
+
+| Cloud AI Coaching               | AILokak                                                                 |
+| ------------------------------- | ----------------------------------------------------------------------- |
+| $150/month subscription         | Free forever after model download                                       |
+| Answers sent to company servers | Never leaves your machine                                               |
+| Closed question bank            | Marketplace where real professionals sell verified knowledge packs       |
+| Locked to one model             | Switch between any QVAC-supported model, or fine-tune your own          |
+| Requires internet               | Works fully offline                                                     |
+
+---
 ## Links
 
 * [Demo Video](https://youtube.com/watch?v=g4TzYx3tNbo)
@@ -117,16 +141,6 @@ const resumeText = result.blocks.map(b => b.text).join('\n')
 
 ---
 
-## Why Local AI?
-
-| Cloud AI                | AILokak                   |
-| ----------------------- | ------------------------- |
-| Answers sent to servers | Never leaves your machine |
-| Recurring subscription  | Free after model download |
-| Rate limits and latency | Instant, no throttling    |
-| Requires internet       | Works fully offline       |
-
----
 
 ## How It Works
 

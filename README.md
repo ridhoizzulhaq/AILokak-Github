@@ -242,7 +242,7 @@ Models are cached in `~/.qvac/models/` after first download. Switching back to a
 
 ![Packs](https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@1d57e0045b17b153bf99f9c557943f3ca6520563/uploads/2026-05-11T12-38-13-565Z-3h7n6m2r6.png)
 
-AILokak's marketplace offers interview packs tailored to specific careers, each containing field-specific questions and evaluation criteria.
+AILokak's marketplace offers interview packs tailored to specific careers, each containing field-specific questions and evaluation criteria. AILokak use x402 and Plasma Mainnet as chain ([docs](https://docs.wdk.tether.io/ai/x402).
 
 Users can:
 

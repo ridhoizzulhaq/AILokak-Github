@@ -398,7 +398,6 @@ npm install
 Download and place the following files inside `vits-piper-en_US-ryan-high/`:
 
 ```text
-resources/
 ├── en_US-ryan-high.onnx
 └── en_US-ryan-high.onnx.json
 ```

@@ -23,7 +23,7 @@
 >
 > **Pack server** (`http://13.221.44.63:4021`) may be offline. Run locally or change URL in app Settings. See [Marketplace Pack Server](#marketplace-pack-server-optional).
 
-> Prefer to run from source? See [Option B](#option-b--run-from-source).
+### Prefer to run from source? (Recommendation for Best Output) See [Option B](#option-b--run-from-source).
 ---
 
 ## What It Does
